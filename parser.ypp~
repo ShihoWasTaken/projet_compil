@@ -1,0 +1,42 @@
+%{
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include "monDessin.h"
+#include <QtGui>
+#include <QApplication>
+
+#define YYERROR_VERBOSE
+#define USE(VALUE) /*empty*/
+
+
+extern "C" int yyparse (void);
+extern "C" int yylex(void);
+extern "C" void yyerror(const std::string&);
+extern FILE* yyin;
+
+QPointer<monDessin> D;
+%}
+
+%start Input
+%%
+Input:
+
+%%
+
+
+void trace(QMainWindow * w){
+	yyin = fopen("data.txt", "r");
+	D = new monDessin;	
+	w->setCentralWidget(D);
+    	w->setMinimumSize(800, 600);
+	yyparse();
+	D->draw();
+	w->show();
+	return	;
+}
+
+void yyerror(const std::string& mess){
+    std::cout << mess << std::endl;
+}
