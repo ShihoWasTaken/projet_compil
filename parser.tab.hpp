@@ -45,7 +45,27 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    NOMBRE = 258
+    ENTIER = 258,
+    CERCLE = 259,
+    RECTANGLE = 260,
+    LIGNE = 261,
+    EPAISSEUR = 262,
+    COULEUR = 263,
+    OPACITE = 264,
+    ROTATION = 265,
+    REMPLISSAGE = 266,
+    IDENTIFICATEUR = 267,
+    VIRGULE = 268,
+    DEGRE = 269,
+    POURCENT = 270,
+    PARENTHESE_OUVRANTE = 271,
+    PARENTHESE_FERMANTE = 272,
+    ACCOLADE_OUVRANTE = 273,
+    ACCOLADE_FERMANTE = 274,
+    CROCHET_OUVRANT = 275,
+    CROCHET_FERMANT = 276,
+    EGAL = 277,
+    FIN = 278
   };
 #endif
 
