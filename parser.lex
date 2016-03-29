@@ -15,8 +15,14 @@ blancs    [ \t\n]
 
 chiffre   [0-9]
 entier    {chiffre}+
-commentaire_multi	(\/\*(.*)\*\/|\\)
+
+commentaire_multi	\/\\*(.*?)\\*\/
+
 commentaire_mono	[/]{2,}.*
+
+ligne				(l|L)(i|I)(g|G)(n|N)(e|E)
+rectangle			(r|R)(e|E)(c|C)(t|T)(a|A)(n|N)(g|G)(l|L)(e|E)
+cercle				(c|C)(e|E)(r|R)(c|C)(l|L)(e|E)
 
 %%
 
@@ -31,9 +37,9 @@ commentaire_mono	[/]{2,}.*
 				//return(NOMBRE);
 		    }
 
-(c|C)(e|E)(r|R)(c|C)(l|L)(e|E) { cout << "Trouvé un cercle: " << yytext << endl; }
-(r|R)(e|E)(c|C)(t|T)(a|A)(n|N)(g|G)(l|L)(e|E) { cout << "Trouvé un rectangle: " << yytext << endl; }
-(l|L)(i|I)(g|G)(n|N)(e|E) { cout << "Trouvé une ligne: " << yytext << endl; }
+{cercle} { cout << "Trouvé un cercle: " << yytext << endl; }
+{rectangle} { cout << "Trouvé un rectangle: " << yytext << endl; }
+{ligne} { cout << "Trouvé une ligne: " << yytext << endl; }
 
 (e|é|E|É)(p|P)(a|A)(i|I)(s|S){2}(e|E)(u|U)(r|R) { cout << "Trouvé une épaisseur: " << yytext << endl; }
 (c|C)(o|O)(u|U)(l|L)(e|E)(u|U)(r|R) { cout << "Trouvé une couleur: " << yytext << endl; }
