@@ -20,67 +20,120 @@ void monDessin::paintEvent(QPaintEvent *event)
 {
 	// On caste en string
 	cout << "taille du vecteur = " << m_formes.size() << endl;
-    for (std::string forme : m_formes ) 
+
+	QRect rect = event->rect();
+
+
+		Cercle * C = dynamic_cast<Cercle *> (new Forme(0,0));
+
+		Rectangle * R = dynamic_cast<Rectangle *> (new Forme(0,0));
+
+		Ligne * L = dynamic_cast<Ligne *> (new Forme(0,0));
+		// On parcourt le vecteur de Formes
+	    for (Forme * forme : m_formes ) 
+		{
+			// On caste la forme en les 3 classes filles
+			// Cela permet de retrouver son "type"
+			// Si le cast échoue, le pointeur vaudra null
+			Cercle * C = dynamic_cast<Cercle *> (forme);
+			Rectangle * R = dynamic_cast<Rectangle *> (forme);
+			Ligne * L = dynamic_cast<Ligne *> (forme);
+			if(C != nullptr)
+			{
+				dessinerCercle(C);
+			}
+			else if(R != nullptr)
+			{
+				dessinerRectangle(R);
+			}
+			else if(L != nullptr)
+			{
+				dessinerLigne(L);
+			}
+		}
+}
+
+void monDessin::dessinerRectangle(Rectangle *rectangle)
+{
+	// On définit le painter et le pen
+	QPainter painter(this);
+	QPen pen;
+		
+	// Couleur RBGA gérant l'opacité
+	pen.setBrush(rectangle->get_color_alpha());
+
+	// On fixe l'épaisseur du pen
+	pen.setWidth(rectangle->get_thickness());
+
+	// On remplit ou non
+	if(rectangle->get_filling() == PLEIN)
 	{
-	    cout << "On dessine un rectangle du vecteur" << endl;
-		cout << "Texte: " <<  forme << endl;
-		for(int i = 0; forme[i]; i++){
-		  forme[i] = tolower(forme[i]);
-		}
-		if(forme == "rectangle")
-		{
-			QRect rect = event->rect();
-			dessinerRectangle(rect);
-	    	cout << "rectangle" << endl;
-		}
-	    else if(forme == "cercle")
-		{
-			QRect rect = event->rect();
-			dessinerCercle();
-	    	cout << "cercle" << endl;
-		}
-	    else if(forme == "ligne")
-		{
-			QRect rect = event->rect();
-			dessinerRectangle(rect);
-	    	cout << "ligne" << endl;
-		}
+		painter.setBrush(rectangle->get_color_alpha());
 	}
+
+	// On fixe le pen au painter
+	painter.setPen(pen);	
+
+	// On dessine un rectangle
+	painter.drawRect(rectangle->get_x(), rectangle->get_y(), rectangle->get_length(), rectangle->get_width());
+
+	// On effectue la rotation
+	painter.rotate(rectangle->get_rotation());
 }
 
-void monDessin::dessinerRectangle(QRect &rect)
+void monDessin::dessinerCercle(Cercle *cercle)
 {
-	QPainter p(this);
+	// On définit le painter et le pen
+	QPainter painter(this);
+	QPen pen;
+	
+	// Couleur RBGA gérant l'opacité
+	pen.setBrush(cercle->get_color_alpha());
 
-	QPen pe;
-	pe.setWidth(5);
-	p.setBrush(Qt::yellow);
-	pe.setBrush(Qt::green);
-	p.setPen(pe);
-	p.drawRect(QRect(10,15,20,25));
-	p.rotate(45);
-	p.setOpacity(0.5);
+	// On fixe l'épaisseur du pen
+	pen.setWidth(cercle->get_thickness());
+
+	// On remplit ou non
+	if(cercle->get_filling() == PLEIN)
+	{
+		painter.setBrush(cercle->get_color_alpha());
+	}
+
+	// On fixe le pen au painter
+	painter.setPen(pen);
+
+	// On dessine un cercle (ellipse avec 2 même radius)
+	painter.drawEllipse(cercle->get_x()-cercle->get_radius(), cercle->get_y()-cercle->get_radius(), cercle->get_radius() * 2, cercle->get_radius() * 2);
+
+	// On effectue la rotation
+	painter.rotate(cercle->get_rotation());
 }
 
-void monDessin::dessinerCercle()
+
+void monDessin::dessinerLigne(Ligne *ligne)
 {
-	QPainter p(this);
-	QPen pe;
-	QColor color = Qt::green;
+	// On définit le painter et le pen
+	QPainter painter(this);
+	QPen pen;
 	
-	// Couleur & Opacité
-	pe.setBrush(color);
-	// Epaisseur
-	pe.setWidth(5);
-	// Remplissage
-	//if(C->get_filling() == plein)
-		p.setBrush(color);
-	p.setPen(pe);
-	
-	p.drawEllipse(1,
-	 1,
-	  50,
-	   50);
-	// Rotation
-	p.rotate(0);
+	// Couleur RBGA gérant l'opacité
+	pen.setBrush(ligne->get_color_alpha());
+
+	// On fixe l'épaisseur du pen
+	pen.setWidth(ligne->get_thickness());
+
+	// On remplit ou non
+	if(ligne->get_filling() == PLEIN)
+	{
+		painter.setBrush(ligne->get_color_alpha());
+	}
+
+	// On fixe le pen au painter
+	painter.setPen(pen);
+
+	// On dessine la ligne
+	painter.drawLine(ligne->get_x(), ligne->get_y(), ligne->get_x_end(), ligne->get_y_end());
+
+	// On effectue la rotation
+	painter.rotate(ligne->get_rotation());
 }

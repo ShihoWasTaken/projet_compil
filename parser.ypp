@@ -7,6 +7,11 @@
 #include <QtGui>
 #include <QApplication>
 
+#include "rectangle.h"
+#include "cercle.h"
+#include "ligne.h"
+
+
 #define YYERROR_VERBOSE
 #define USE(VALUE) /*empty*/
 
@@ -21,10 +26,10 @@ QPointer<monDessin> D;
 
 %union{
     char * texte;
-    int valeur;
+    int valeur_entiere;
 }
 
-%token ENTIER
+%token<valeur_entiere> ENTIER
 %token<texte> CERCLE
 %token<texte> RECTANGLE
 %token<texte> LIGNE
@@ -32,12 +37,12 @@ QPointer<monDessin> D;
 %token<texte> COLOR
 %token<texte> FILLING
 
-%token EPAISSEUR
-%token COULEUR
-%token OPACITE
-%token ROTATION
-%token REMPLISSAGE
-%token IDENTIFICATEUR
+%token<valeur_entiere> EPAISSEUR
+%token<texte> COULEUR
+%token<valeur_entiere> OPACITE
+%token<valeur_entiere> ROTATION
+%token<texte> REMPLISSAGE
+%token<texte> IDENTIFICATEUR
 %token VIRGULE
 %token DEGRE
 %token POURCENT
@@ -48,6 +53,9 @@ QPointer<monDessin> D;
 %token CROCHET_OUVRANT
 %token CROCHET_FERMANT
 %token EGAL
+%token FENETRE
+%token<valeur_entiere> LONGUEUR
+%token<valeur_entiere> HAUTEUR
 %token FIN_LIGNE
 
 %type<texte> Forme
@@ -60,13 +68,19 @@ Input:
 	|syntaxe1 Input
 	|syntaxe2 Input
 	|syntaxe3 Input
+	|syntaxe_fenetre Input
 
 syntaxe1: 
 	Forme PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE ACCOLADE_OUVRANTE COLOR VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE
 	{
-		char * nom_forme = $1;
-		std::cout << "Syntaxe1: $1 = " << nom_forme << std::endl;
-		D->m_formes.push_back(nom_forme);
+		Rectangle *r = new Rectangle($3,$5,$7,$9);
+		std::cout << "Filling = " << $16 << std::endl;
+		if (strcmp($16,"plein") == 0)
+		{
+			std::cout << "On remplit = " << $16 << std::endl;
+			r->set_filling(PLEIN);
+		}
+		D->m_formes.push_back(r);
 	}
 
 syntaxe2: 
@@ -78,9 +92,8 @@ syntaxe2:
 	OPACITE EGAL ENTIER POURCENT FIN_LIGNE
 	ACCOLADE_FERMANTE
 	{
-		char * nom_forme = $1;
-		std::cout << "Syntaxe2: $1 = " << nom_forme << std::endl;
-		D->m_formes.push_back(nom_forme);
+		Cercle *c = new Cercle($3,$5,$7);
+		D->m_formes.push_back(c);
 	}
 
 syntaxe3: 
@@ -88,10 +101,22 @@ syntaxe3:
 	IDENTIFICATEUR CROCHET_OUVRANT EPAISSEUR CROCHET_FERMANT EGAL ENTIER FIN_LIGNE
 	IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR		
 	{
-		char * nom_forme = $1;
-		std::cout << "Syntaxe3: $1 = " << nom_forme << std::endl;
-		D->m_formes.push_back(nom_forme);
+		Ligne *l = new Ligne($4,$6,$8,$10);
+		D->m_formes.push_back(l);
 	}
+
+syntaxe_fenetre:
+	FENETRE CROCHET_OUVRANT LONGUEUR CROCHET_FERMANT EGAL ENTIER
+	{
+		D->m_longueur = $3;
+		std::cout << "Longueur = " << D->m_longueur << " $3 = " << $3 << std::endl;
+	}
+	|FENETRE CROCHET_OUVRANT HAUTEUR CROCHET_FERMANT EGAL ENTIER
+	{
+		D->m_hauteur = $3;
+		std::cout << "Hauteur = " << D->m_hauteur << " $3 = " << $3 << std::endl;
+	}
+	|FENETRE CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR
 
 Forme:
 	RECTANGLE
@@ -107,7 +132,11 @@ void trace(QMainWindow * w){
 	D = new monDessin;	
 	w->setCentralWidget(D);
     	w->setMinimumSize(800, 600);
+    // On remplit les attributs au cas où ils ne sont pas fournis dans le fichier texte
+    D->m_hauteur = 800;
+    D->m_longueur = 600;
 	yyparse();
+	w->resize(D->m_hauteur, D->m_longueur);
 	D->draw();
 	w->show();
 	return	;

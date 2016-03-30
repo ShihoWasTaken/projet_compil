@@ -35,7 +35,7 @@ remplissage (plein|vide)
 {commentaire_mono} { cout << "Trouvé un commentaire monoligne: " << yytext << endl; }
 
 {entier}    {
-				yylval.valeur = atoi(yytext);
+				yylval.valeur_entiere = atoi(yytext);
 				cout << "Trouvé un entier: " << yytext << endl;
 				return(ENTIER);
 		    }
@@ -49,6 +49,12 @@ remplissage (plein|vide)
 (o|O)(p|P)(a|A)(c|C)(i|I)(t|T)(e|é|E|É) { cout << "Trouvé une opacité: " << yytext << endl; return(OPACITE); }
 (r|R)(o|O)(t|T)(a|A)(t|T)(i|I)(o|O)(n|N) { cout << "Trouvé une rotation: " << yytext << endl; return(ROTATION);  }
 (r|R)(e|E)(m|M)(p|P)(l|L)(i|I)(s|S){2}(a|A)(g|G)(e|E) { cout << "Trouvé un remplissage: " << yytext << endl; return(REMPLISSAGE); }
+
+(f|F)(e|E)(n|N)(e|E|ê)(t|T)(r|R)(e|E) { cout << "Trouvé une fenêtre: " << yytext << endl; return(FENETRE); }
+(l|L)(o|O)(n|N)(g|G)(u|U)(e|E)(u|U)(r|R) { cout << "Trouvé une longueur: " << yytext << endl; return(LONGUEUR); }
+(h|H)(a|A)(u|U)(t|T)(e|E)(u|U)(r|R) { cout << "Trouvé une hauteur: " << yytext << endl; return(HAUTEUR); }
+
+
 
 
 {couleur} { cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLOR);}

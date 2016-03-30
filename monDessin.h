@@ -5,6 +5,12 @@
 #include <QMainWindow>
 #include <vector>
 
+
+#include "forme.h"
+#include "rectangle.h"
+#include "cercle.h"
+#include "ligne.h"
+
 class monDessin:public QWidget
 {
 	Q_OBJECT
@@ -16,10 +22,14 @@ class monDessin:public QWidget
 		~monDessin();
 		void paintEvent(QPaintEvent *event);
 		void draw() {update();}
-		void dessinerRectangle(QRect &rect);
-		void dessinerCercle();
+		void dessinerRectangle(Rectangle *rectangle);
+		void dessinerCercle(Cercle *cercle);
+		void dessinerLigne(Ligne *ligne);
 
-		std::vector<char *> m_formes;
+		std::vector<Forme *> m_formes;
+		int m_longueur;
+		int m_hauteur;
+
 };
 
 

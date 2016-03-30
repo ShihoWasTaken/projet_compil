@@ -67,7 +67,10 @@ extern int yydebug;
     CROCHET_OUVRANT = 277,
     CROCHET_FERMANT = 278,
     EGAL = 279,
-    FIN_LIGNE = 280
+    FENETRE = 280,
+    LONGUEUR = 281,
+    HAUTEUR = 282,
+    FIN_LIGNE = 283
   };
 #endif
 
@@ -76,12 +79,12 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 22 "parser.ypp" /* yacc.c:1909  */
+#line 27 "parser.ypp" /* yacc.c:1909  */
 
     char * texte;
-    int valeur;
+    int valeur_entiere;
 
-#line 85 "parser.tab.hpp" /* yacc.c:1909  */
+#line 88 "parser.tab.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
