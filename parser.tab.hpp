@@ -49,29 +49,40 @@ extern int yydebug;
     CERCLE = 259,
     RECTANGLE = 260,
     LIGNE = 261,
-    EPAISSEUR = 262,
-    COULEUR = 263,
-    OPACITE = 264,
-    ROTATION = 265,
-    REMPLISSAGE = 266,
-    IDENTIFICATEUR = 267,
-    VIRGULE = 268,
-    DEGRE = 269,
-    POURCENT = 270,
-    PARENTHESE_OUVRANTE = 271,
-    PARENTHESE_FERMANTE = 272,
-    ACCOLADE_OUVRANTE = 273,
-    ACCOLADE_FERMANTE = 274,
-    CROCHET_OUVRANT = 275,
-    CROCHET_FERMANT = 276,
-    EGAL = 277,
-    FIN = 278
+    COLOR = 262,
+    FILLING = 263,
+    EPAISSEUR = 264,
+    COULEUR = 265,
+    OPACITE = 266,
+    ROTATION = 267,
+    REMPLISSAGE = 268,
+    IDENTIFICATEUR = 269,
+    VIRGULE = 270,
+    DEGRE = 271,
+    POURCENT = 272,
+    PARENTHESE_OUVRANTE = 273,
+    PARENTHESE_FERMANTE = 274,
+    ACCOLADE_OUVRANTE = 275,
+    ACCOLADE_FERMANTE = 276,
+    CROCHET_OUVRANT = 277,
+    CROCHET_FERMANT = 278,
+    EGAL = 279,
+    FIN_LIGNE = 280
   };
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE YYSTYPE;
+union YYSTYPE
+{
+#line 22 "parser.ypp" /* yacc.c:1909  */
+
+    char * texte;
+    int valeur;
+
+#line 85 "parser.tab.hpp" /* yacc.c:1909  */
+};
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

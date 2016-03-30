@@ -35,14 +35,14 @@ remplissage (plein|vide)
 {commentaire_mono} { cout << "Trouvé un commentaire monoligne: " << yytext << endl; }
 
 {entier}    {
-				yylval=atoi(yytext);
+				yylval.valeur = atoi(yytext);
 				cout << "Trouvé un entier: " << yytext << endl;
 				return(ENTIER);
 		    }
 
-{cercle} { cout << "Trouvé un cercle: " << yytext << endl; return(CERCLE); }
-{rectangle} { cout << "Trouvé un rectangle: " << yytext << endl; return(RECTANGLE); }
-{ligne} { cout << "Trouvé une ligne: " << yytext << endl; return(LIGNE); }
+{cercle} { yylval.texte = strdup(yytext); return(CERCLE); }
+{rectangle} { yylval.texte = strdup(yytext); return(RECTANGLE); }
+{ligne} { yylval.texte = strdup(yytext); return(LIGNE); }
 
 (e|é|E|É)(p|P)(a|A)(i|I)(s|S){2}(e|E)(u|U)(r|R) { cout << "Trouvé une épaisseur: " << yytext << endl; return(EPAISSEUR); }
 (c|C)(o|O)(u|U)(l|L)(e|E)(u|U)(r|R) { cout << "Trouvé une couleur: " << yytext << endl; return(COULEUR); }
@@ -51,12 +51,13 @@ remplissage (plein|vide)
 (r|R)(e|E)(m|M)(p|P)(l|L)(i|I)(s|S){2}(a|A)(g|G)(e|E) { cout << "Trouvé un remplissage: " << yytext << endl; return(REMPLISSAGE); }
 
 
-{couleur} { cout << "Trouvé une couleur: " << yytext << endl; return(COULEUR);}
-{remplissage} { cout << "Trouvé un remplissage: " << yytext << endl; return(REMPLISSAGE);}
+{couleur} { cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLOR);}
+{remplissage} { cout << "Trouvé un remplissage: " << yytext << endl; yylval.texte = strdup(yytext); return(FILLING);}
 
 [A-Za-z]([a-z]|[A-Z]|[0-9])* { cout << "Trouvé un identificateur: " << yytext << endl; return(IDENTIFICATEUR); }
 
-[\n] { cout << "Trouvé un \\n(fin): " << endl; return(FIN);}
+"\n" { cout << "Trouvé un \\n(fin): " << endl; return(FIN_LIGNE);}
+
 "," { cout << "Trouvé une virgule: " << yytext << endl; return(VIRGULE); }
 "°" { cout << "Trouvé un degré: " << "\xc2\xb0" << endl; return(DEGRE); }
 "%"	{ cout << "Trouvé un %: " << yytext << endl; return(POURCENT); }
