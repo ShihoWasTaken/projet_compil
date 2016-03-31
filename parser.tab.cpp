@@ -1412,8 +1412,8 @@ yyreduce:
   case 21:
 #line 158 "parser.ypp" /* yacc.c:1646  */
     {
-		D->m_longueur = (yyvsp[-3].valeur_entiere);
-		std::cout << "Longueur = " << D->m_longueur << " $3 = " << (yyvsp[-3].valeur_entiere) << std::endl;
+		D->m_longueur = (yyvsp[0].valeur_entiere);
+		std::cout << "Longueur = " << D->m_longueur << " $6 = " << (yyvsp[0].valeur_entiere) << std::endl;
 	}
 #line 1419 "parser.tab.cpp" /* yacc.c:1646  */
     break;
@@ -1421,8 +1421,8 @@ yyreduce:
   case 22:
 #line 163 "parser.ypp" /* yacc.c:1646  */
     {
-		D->m_hauteur = (yyvsp[-3].valeur_entiere);
-		std::cout << "Hauteur = " << D->m_hauteur << " $3 = " << (yyvsp[-3].valeur_entiere) << std::endl;
+		D->m_hauteur = (yyvsp[0].valeur_entiere);
+		std::cout << "Hauteur = " << D->m_hauteur << " $6 = " << (yyvsp[0].valeur_entiere) << std::endl;
 	}
 #line 1428 "parser.tab.cpp" /* yacc.c:1646  */
     break;
@@ -1695,10 +1695,10 @@ void trace(QMainWindow * w){
 	w->setCentralWidget(D);
     	w->setMinimumSize(800, 600);
     // On remplit les attributs au cas où ils ne sont pas fournis dans le fichier texte
-    D->m_hauteur = 800;
-    D->m_longueur = 600;
+    D->m_longueur = 800;
+    D->m_hauteur = 600;
 	yyparse();
-	w->resize(D->m_hauteur, D->m_longueur);
+	w->resize(D->m_longueur, D->m_hauteur);
 	D->draw();
 	w->show();
 	return	;

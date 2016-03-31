@@ -18,6 +18,9 @@ opacité = 90%
 Commentaire multiligne
 */
 
-LigNe l1(1, 1, 50, 50)
+LigNe l1(410, 350, 50, 50)
 l1[épaisseur] = 4
 l1[couleur] = bleu
+
+Fenetre[longueur] = 1280
+Fenetre[hauteur] = 720

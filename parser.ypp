@@ -156,13 +156,13 @@ option_identifiant:
 syntaxe_fenetre:
 	FENETRE CROCHET_OUVRANT LONGUEUR CROCHET_FERMANT EGAL ENTIER
 	{
-		D->m_longueur = $3;
-		std::cout << "Longueur = " << D->m_longueur << " $3 = " << $3 << std::endl;
+		D->m_longueur = $6;
+		std::cout << "Longueur = " << D->m_longueur << " $6 = " << $6 << std::endl;
 	}
 	|FENETRE CROCHET_OUVRANT HAUTEUR CROCHET_FERMANT EGAL ENTIER
 	{
-		D->m_hauteur = $3;
-		std::cout << "Hauteur = " << D->m_hauteur << " $3 = " << $3 << std::endl;
+		D->m_hauteur = $6;
+		std::cout << "Hauteur = " << D->m_hauteur << " $6 = " << $6 << std::endl;
 	}
 	|FENETRE CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR
 
@@ -204,10 +204,10 @@ void trace(QMainWindow * w){
 	w->setCentralWidget(D);
     	w->setMinimumSize(800, 600);
     // On remplit les attributs au cas où ils ne sont pas fournis dans le fichier texte
-    D->m_hauteur = 800;
-    D->m_longueur = 600;
+    D->m_longueur = 800;
+    D->m_hauteur = 600;
 	yyparse();
-	w->resize(D->m_hauteur, D->m_longueur);
+	w->resize(D->m_longueur, D->m_hauteur);
 	D->draw();
 	w->show();
 	return	;
