@@ -21,6 +21,11 @@ Commentaire multiligne
 LigNe l1(410, 350, 50, 50)
 l1[épaisseur] = 4
 l1[couleur] = bleu
+l1[rotation] = 50°
+l1[remplissage] = plein
+l1[opacité] = 90%
+
 
 Fenetre[longueur] = 1280
 Fenetre[hauteur] = 720
+Fenetre[couleur] = vert

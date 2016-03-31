@@ -125,7 +125,6 @@ Option_multiligne:
 		Forme *f = D->currentShape();
 		if (strcmp($3,"plein") == 0)
 		{
-			std::cout << "On remplit = " << $3 << std::endl;
 			f->set_filling(PLEIN);
 		}
 	}
@@ -151,20 +150,52 @@ syntaxe_identifiant:
 
 option_identifiant:
 	IDENTIFICATEUR CROCHET_OUVRANT EPAISSEUR CROCHET_FERMANT EGAL ENTIER
+	{
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_thickness($6);
+	}
 	|IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR
+	{
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_color($6);
+	}
+	|IDENTIFICATEUR CROCHET_OUVRANT ROTATION CROCHET_FERMANT EGAL ENTIER DEGRE
+	{
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_rotation($6);
+	}
+	|IDENTIFICATEUR CROCHET_OUVRANT REMPLISSAGE CROCHET_FERMANT EGAL FILLING
+	{	
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		if (strcmp($6,"plein") == 0)
+		{
+			f->set_filling(PLEIN);
+		}
+	}
+	|IDENTIFICATEUR CROCHET_OUVRANT OPACITE CROCHET_FERMANT EGAL ENTIER POURCENT
+	{
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_opacity($6);
+	}
 
 syntaxe_fenetre:
 	FENETRE CROCHET_OUVRANT LONGUEUR CROCHET_FERMANT EGAL ENTIER
 	{
 		D->m_longueur = $6;
-		std::cout << "Longueur = " << D->m_longueur << " $6 = " << $6 << std::endl;
 	}
 	|FENETRE CROCHET_OUVRANT HAUTEUR CROCHET_FERMANT EGAL ENTIER
 	{
 		D->m_hauteur = $6;
-		std::cout << "Hauteur = " << D->m_hauteur << " $6 = " << $6 << std::endl;
 	}
 	|FENETRE CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR
+	{
+		D->set_color($6);
+	}
 
 Forme:
 	RECTANGLE
@@ -206,12 +237,23 @@ void trace(QMainWindow * w){
     // On remplit les attributs au cas où ils ne sont pas fournis dans le fichier texte
     D->m_longueur = 800;
     D->m_hauteur = 600;
+
+    // On commence à parser
 	yyparse();
+
+	// On met à jour la fenêtre et on affiche les formes une fois le parsing terminé
+	QPalette Pal(QApplication::palette());
+	Pal.setColor(QPalette::Background, D->color);		
+	w->setAutoFillBackground(true);
+	w->setPalette(Pal);
+
 	w->resize(D->m_longueur, D->m_hauteur);
 	D->draw();
 	w->show();
 	return	;
 }
+
+
 
 
 
