@@ -65,12 +65,12 @@ QPointer<monDessin> D;
 Input: 
 	FIN_LIGNE
 	|FIN_LIGNE Input
-	|syntaxe1 Input
-	|syntaxe2 Input
-	|syntaxe3 Input
+	|syntaxe_monoligne Input
+	|syntaxe_multiligne Input
+	|syntaxe_identifiant Input
 	|syntaxe_fenetre Input
 
-syntaxe1: 
+syntaxe_monoligne: 
 	Forme PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE ACCOLADE_OUVRANTE COLOR VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE
 	{
 		Rectangle *r = new Rectangle($3,$5,$7,$9);
@@ -83,20 +83,56 @@ syntaxe1:
 		D->m_formes.push_back(r);
 	}
 
-syntaxe2: 
+syntaxe_multiligne: 
 	Forme PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE ACCOLADE_OUVRANTE FIN_LIGNE
-	COULEUR EGAL COLOR FIN_LIGNE
-	ROTATION EGAL ENTIER DEGRE FIN_LIGNE
-	REMPLISSAGE EGAL FILLING FIN_LIGNE
-	EPAISSEUR EGAL ENTIER FIN_LIGNE
-	OPACITE EGAL ENTIER POURCENT FIN_LIGNE
-	ACCOLADE_FERMANTE
 	{
 		Cercle *c = new Cercle($3,$5,$7);
 		D->m_formes.push_back(c);
 	}
+	Option_multiligne
+	Option_multiligne
+	Option_multiligne
+	Option_multiligne
+	Option_multiligne
+	ACCOLADE_FERMANTE
 
-syntaxe3: 
+Option_multiligne:
+	COULEUR EGAL COLOR FIN_LIGNE
+	{
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_color($3);
+	}
+	|ROTATION EGAL ENTIER DEGRE FIN_LIGNE
+	{
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_rotation($3);
+	}
+	|REMPLISSAGE EGAL FILLING FIN_LIGNE
+	{	
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		if (strcmp($3,"plein") == 0)
+		{
+			std::cout << "On remplit = " << $3 << std::endl;
+			f->set_filling(PLEIN);
+		}
+	}
+	|EPAISSEUR EGAL ENTIER FIN_LIGNE
+	{
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_thickness($3);
+	}
+	|OPACITE EGAL ENTIER POURCENT FIN_LIGNE
+	{
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_opacity($3);
+	}
+
+syntaxe_identifiant: 
 	Forme IDENTIFICATEUR PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE FIN_LIGNE
 	IDENTIFICATEUR CROCHET_OUVRANT EPAISSEUR CROCHET_FERMANT EGAL ENTIER FIN_LIGNE
 	IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR		

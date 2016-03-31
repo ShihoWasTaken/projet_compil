@@ -16,7 +16,7 @@ blancs    [ \t]
 chiffre   [0-9]
 entier    {chiffre}+
 
-commentaire_multi	\/\\*(.*?)\\*\/
+commentaire_multi	[/][*]([^*])*[*][/]
 
 commentaire_mono	[/]{2,}.*
 
@@ -24,13 +24,14 @@ ligne				(l|L)(i|I)(g|G)(n|N)(e|E)
 rectangle			(r|R)(e|E)(c|C)(t|T)(a|A)(n|N)(g|G)(l|L)(e|E)
 cercle				(c|C)(e|E)(r|R)(c|C)(l|L)(e|E)
 
-couleur (rouge|vert|bleu|jaune|noir|blanc)
+couleur (rouge|vert|bleu|jaune|noir|blanc|gris)
 remplissage (plein|vide)
 
 %%
 
 {blancs}   { /* On ignore */ }
 
+"\n" { cout << "Trouvé un \\n(fin): " << endl; return(FIN_LIGNE);}
 {commentaire_multi} { cout << "Trouvé un commentaire multiligne: " << yytext << endl; }
 {commentaire_mono} { cout << "Trouvé un commentaire monoligne: " << yytext << endl; }
 
@@ -62,7 +63,6 @@ remplissage (plein|vide)
 
 [A-Za-z]([a-z]|[A-Z]|[0-9])* { cout << "Trouvé un identificateur: " << yytext << endl; return(IDENTIFICATEUR); }
 
-"\n" { cout << "Trouvé un \\n(fin): " << endl; return(FIN_LIGNE);}
 
 "," { cout << "Trouvé une virgule: " << yytext << endl; return(VIRGULE); }
 "°" { cout << "Trouvé un degré: " << "\xc2\xb0" << endl; return(DEGRE); }
