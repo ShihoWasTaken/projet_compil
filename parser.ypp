@@ -68,9 +68,8 @@ QPointer<monDessin> D;
 %%
 Input: 
 
-	|FIN_LIGNE
 	{
-		std::cout << "Fin du parsing" << std::endl;
+		std::cout << "Fin du fichier atteinte - Arrêt du parsing" << std::endl;
 	}
 	|FIN_LIGNE Input
 	|COMMENTAIRE_MONO Input

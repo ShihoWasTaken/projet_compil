@@ -429,7 +429,7 @@ union yyalloc
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  25
+#define YYNRULES  24
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  113
 
@@ -480,9 +480,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    69,    69,    71,    75,    76,    77,    78,    79,    80,
-      81,    84,    98,    97,   110,   116,   122,   132,   138,   146,
-     155,   160,   165,   168,   169,   170
+       0,    71,    71,    74,    75,    76,    77,    78,    79,    80,
+      83,    97,    96,   109,   115,   121,   131,   137,   145,   154,
+     159,   164,   167,   168,   169
 };
 #endif
 
@@ -548,18 +548,18 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       2,    24,    23,    25,     0,     2,     2,     2,     0,     2,
-       2,     2,     2,     0,     0,     4,     5,     6,     1,     7,
-       8,     9,    10,     0,     0,     0,     0,     0,     0,     0,
+       2,    23,    22,    24,     0,     2,     2,     2,     0,     2,
+       2,     2,     2,     0,     0,     3,     4,     5,     1,     6,
+       7,     8,     9,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      22,    20,    21,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    12,     0,     0,     0,     0,
+      21,    19,    20,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    11,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    17,    14,     0,     0,    16,
-       0,     0,     0,    18,    15,     0,     0,     0,    13,     0,
+       0,     0,     0,     0,     0,    16,    13,     0,     0,    15,
+       0,     0,     0,    17,    14,     0,     0,     0,    12,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      11,     0,    19
+      10,     0,    18
 };
 
   /* YYPGOTO[NTERM-NUM].  */
@@ -631,16 +631,16 @@ static const yytype_uint8 yystos[] =
 static const yytype_uint8 yyr1[] =
 {
        0,    32,    33,    33,    33,    33,    33,    33,    33,    33,
-      33,    34,    36,    35,    37,    37,    37,    37,    37,    38,
-      39,    39,    39,    40,    40,    40
+      34,    36,    35,    37,    37,    37,    37,    37,    38,    39,
+      39,    39,    40,    40,    40
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     0,     1,     2,     2,     2,     2,     2,     2,
-       2,    23,     0,    17,     4,     5,     4,     4,     5,    25,
-       6,     6,     6,     1,     1,     1
+       0,     2,     0,     2,     2,     2,     2,     2,     2,     2,
+      23,     0,    17,     4,     5,     4,     4,     5,    25,     6,
+       6,     6,     1,     1,     1
 };
 
 
@@ -1316,16 +1316,16 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 3:
-#line 72 "parser.ypp" /* yacc.c:1646  */
+        case 2:
+#line 71 "parser.ypp" /* yacc.c:1646  */
     {
-		std::cout << "Fin du parsing" << std::endl;
+		std::cout << "Fin du fichier atteinte - Arrêt du parsing" << std::endl;
 	}
 #line 1325 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 11:
-#line 85 "parser.ypp" /* yacc.c:1646  */
+  case 10:
+#line 84 "parser.ypp" /* yacc.c:1646  */
     {
 		Rectangle *r = new Rectangle((yyvsp[-20].valeur_entiere),(yyvsp[-18].valeur_entiere),(yyvsp[-16].valeur_entiere),(yyvsp[-14].valeur_entiere));
 		std::cout << "Filling = " << (yyvsp[-7].texte) << std::endl;
@@ -1339,8 +1339,8 @@ yyreduce:
 #line 1340 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 12:
-#line 98 "parser.ypp" /* yacc.c:1646  */
+  case 11:
+#line 97 "parser.ypp" /* yacc.c:1646  */
     {
 		Cercle *c = new Cercle((yyvsp[-7].valeur_entiere),(yyvsp[-5].valeur_entiere),(yyvsp[-3].valeur_entiere));
 		D->m_formes.push_back(c);
@@ -1348,8 +1348,8 @@ yyreduce:
 #line 1349 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 14:
-#line 111 "parser.ypp" /* yacc.c:1646  */
+  case 13:
+#line 110 "parser.ypp" /* yacc.c:1646  */
     {
 		// On récupère la forme courante pour appliquer les options
 		Forme *f = D->currentShape();
@@ -1358,8 +1358,8 @@ yyreduce:
 #line 1359 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 15:
-#line 117 "parser.ypp" /* yacc.c:1646  */
+  case 14:
+#line 116 "parser.ypp" /* yacc.c:1646  */
     {
 		// On récupère la forme courante pour appliquer les options
 		Forme *f = D->currentShape();
@@ -1368,8 +1368,8 @@ yyreduce:
 #line 1369 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 16:
-#line 123 "parser.ypp" /* yacc.c:1646  */
+  case 15:
+#line 122 "parser.ypp" /* yacc.c:1646  */
     {	
 		// On récupère la forme courante pour appliquer les options
 		Forme *f = D->currentShape();
@@ -1382,8 +1382,8 @@ yyreduce:
 #line 1383 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 17:
-#line 133 "parser.ypp" /* yacc.c:1646  */
+  case 16:
+#line 132 "parser.ypp" /* yacc.c:1646  */
     {
 		// On récupère la forme courante pour appliquer les options
 		Forme *f = D->currentShape();
@@ -1392,8 +1392,8 @@ yyreduce:
 #line 1393 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 18:
-#line 139 "parser.ypp" /* yacc.c:1646  */
+  case 17:
+#line 138 "parser.ypp" /* yacc.c:1646  */
     {
 		// On récupère la forme courante pour appliquer les options
 		Forme *f = D->currentShape();
@@ -1402,8 +1402,8 @@ yyreduce:
 #line 1403 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 19:
-#line 149 "parser.ypp" /* yacc.c:1646  */
+  case 18:
+#line 148 "parser.ypp" /* yacc.c:1646  */
     {
 		Ligne *l = new Ligne((yyvsp[-21].valeur_entiere),(yyvsp[-19].valeur_entiere),(yyvsp[-17].valeur_entiere),(yyvsp[-15].valeur_entiere));
 		D->m_formes.push_back(l);
@@ -1411,8 +1411,8 @@ yyreduce:
 #line 1412 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 20:
-#line 156 "parser.ypp" /* yacc.c:1646  */
+  case 19:
+#line 155 "parser.ypp" /* yacc.c:1646  */
     {
 		D->m_longueur = (yyvsp[-3].valeur_entiere);
 		std::cout << "Longueur = " << D->m_longueur << " $3 = " << (yyvsp[-3].valeur_entiere) << std::endl;
@@ -1420,8 +1420,8 @@ yyreduce:
 #line 1421 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
-  case 21:
-#line 161 "parser.ypp" /* yacc.c:1646  */
+  case 20:
+#line 160 "parser.ypp" /* yacc.c:1646  */
     {
 		D->m_hauteur = (yyvsp[-3].valeur_entiere);
 		std::cout << "Hauteur = " << D->m_hauteur << " $3 = " << (yyvsp[-3].valeur_entiere) << std::endl;
@@ -1658,7 +1658,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 173 "parser.ypp" /* yacc.c:1906  */
+#line 172 "parser.ypp" /* yacc.c:1906  */
 
 
 
