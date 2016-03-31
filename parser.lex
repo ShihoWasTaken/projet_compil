@@ -23,6 +23,12 @@ commentaire_mono	[/]{2,}.*
 ligne				(l|L)(i|I)(g|G)(n|N)(e|E)
 rectangle			(r|R)(e|E)(c|C)(t|T)(a|A)(n|N)(g|G)(l|L)(e|E)
 cercle				(c|C)(e|E)(r|R)(c|C)(l|L)(e|E)
+image				(i|I)(m|M)(a|A)(g|G)(e|E)
+
+path 				^.*\.(jpg|JPG|png|PNG)$
+extension			(jpg|JPG|png|PNG)
+
+identificateur 		[A-Za-z]([a-z]|[A-Z]|[0-9])*
 
 couleur (rouge|vert|bleu|jaune|noir|blanc|gris)
 remplissage (plein|vide)
@@ -44,6 +50,12 @@ remplissage (plein|vide)
 {cercle} { yylval.texte = strdup(yytext); return(CERCLE); }
 {rectangle} { yylval.texte = strdup(yytext); return(RECTANGLE); }
 {ligne} { yylval.texte = strdup(yytext); return(LIGNE); }
+{image} { yylval.texte = strdup(yytext); return(IMAGE); }
+
+
+{extension} { yylval.texte = strdup(yytext); return(EXT_IMG); }
+{path}(.jpg) { yylval.texte = strdup(yytext); return(PATH); }
+
 
 (e|é|E|É)(p|P)(a|A)(i|I)(s|S){2}(e|E)(u|U)(r|R) { cout << "Trouvé une épaisseur: " << yytext << endl; return(EPAISSEUR); }
 (c|C)(o|O)(u|U)(l|L)(e|E)(u|U)(r|R) { cout << "Trouvé une couleur: " << yytext << endl; return(COULEUR); }
@@ -58,12 +70,13 @@ remplissage (plein|vide)
 
 
 
+
 {couleur} { cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLOR);}
 {remplissage} { cout << "Trouvé un remplissage: " << yytext << endl; yylval.texte = strdup(yytext); return(FILLING);}
 
-[A-Za-z]([a-z]|[A-Z]|[0-9])* { cout << "Trouvé un identificateur: " << yytext << endl; return(IDENTIFICATEUR); }
+{identificateur} { cout << "Trouvé un identificateur: " << yytext << endl; return(IDENTIFICATEUR); }
 
-
+"." { cout << "Trouvé un point: " << yytext << endl; return(DOT); }
 "," { cout << "Trouvé une virgule: " << yytext << endl; return(VIRGULE); }
 "°" { cout << "Trouvé un degré: " << "\xc2\xb0" << endl; return(DEGRE); }
 "%"	{ cout << "Trouvé un %: " << yytext << endl; return(POURCENT); }

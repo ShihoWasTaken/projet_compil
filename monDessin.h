@@ -10,6 +10,7 @@
 #include "rectangle.h"
 #include "cercle.h"
 #include "ligne.h"
+#include "image.h"
 
 class monDessin:public QWidget
 {
@@ -22,6 +23,7 @@ class monDessin:public QWidget
 		~monDessin();
 		void paintEvent(QPaintEvent *event);
 		void draw() {update();}
+		void dessinerImage(Image *image);
 		void dessinerRectangle(Rectangle *rectangle);
 		void dessinerCercle(Cercle *cercle);
 		void dessinerLigne(Ligne *ligne);

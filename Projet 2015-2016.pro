@@ -12,5 +12,5 @@ CONFIG += c++11
 
 
 # Input
-HEADERS += global.h monDessin.h parser.tab.hpp forme.h cercle.h rectangle.h ligne.h filling.h
-SOURCES += lex.yy.c parser.tab.cpp main.cpp monDessin.cpp cercle.cpp rectangle.cpp ligne.cpp
+HEADERS += global.h monDessin.h parser.tab.hpp forme.h cercle.h rectangle.h ligne.h image.h filling.h
+SOURCES += lex.yy.c parser.tab.cpp main.cpp monDessin.cpp cercle.cpp rectangle.cpp ligne.cpp image.cpp

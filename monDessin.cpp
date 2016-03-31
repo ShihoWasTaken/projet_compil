@@ -27,6 +27,7 @@ void monDessin::paintEvent(QPaintEvent *event)
 		Cercle * C = dynamic_cast<Cercle *> (forme);
 		Rectangle * R = dynamic_cast<Rectangle *> (forme);
 		Ligne * L = dynamic_cast<Ligne *> (forme);
+		Image * I = dynamic_cast<Image *> (forme);
 		if(C != nullptr)
 		{
 			dessinerCercle(C);
@@ -39,7 +40,20 @@ void monDessin::paintEvent(QPaintEvent *event)
 		{
 			dessinerLigne(L);
 		}
+		else if(I != nullptr)
+		{
+			dessinerImage(I);
+		}
 	}
+}
+
+void monDessin::dessinerImage(Image * image)
+{
+	// On définit le painter
+	QPainter painter(this);
+
+	painter.drawImage(image->get_x(),image->get_y(),QImage(image->get_path()));
+
 }
 
 void monDessin::dessinerRectangle(Rectangle *rectangle)

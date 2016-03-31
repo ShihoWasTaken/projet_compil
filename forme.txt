@@ -28,4 +28,6 @@ l1[opacité] = 90%
 
 Fenetre[longueur] = 1280
 Fenetre[hauteur] = 720
-Fenetre[couleur] = vert
+Fenetre[couleur] = gris
+
+Image(0,0,pikachu.jpg)

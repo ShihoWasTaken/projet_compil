@@ -61,6 +61,10 @@ QPointer<monDessin> D;
 %token HASHTAG
 %token COMMENTAIRE_MONO
 %token COMMENTAIRE_MULTI
+%token IMAGE
+%token<texte> PATH
+%token DOT
+%token<texte> EXT_IMG
 
 
 %type<texte> Forme
@@ -80,6 +84,7 @@ Input:
 	|syntaxe_identifiant Input
 	|option_identifiant Input
 	|syntaxe_fenetre Input
+	|syntaxe_image Input
 
 syntaxe_monoligne: 
 	Instanciation ACCOLADE_OUVRANTE COLOR VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE
@@ -195,6 +200,13 @@ syntaxe_fenetre:
 	|FENETRE CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR
 	{
 		D->set_color($6);
+	}
+
+syntaxe_image:
+	IMAGE PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE IDENTIFICATEUR DOT EXT_IMG PARENTHESE_FERMANTE
+	{
+		Image *i = new Image($3,$5,"pikachu.jpg");
+		D->m_formes.push_back(i);
 	}
 
 Forme:

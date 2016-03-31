@@ -73,7 +73,11 @@ extern int yydebug;
     FIN_LIGNE = 283,
     HASHTAG = 284,
     COMMENTAIRE_MONO = 285,
-    COMMENTAIRE_MULTI = 286
+    COMMENTAIRE_MULTI = 286,
+    IMAGE = 287,
+    PATH = 288,
+    DOT = 289,
+    EXT_IMG = 290
   };
 #endif
 
@@ -87,7 +91,7 @@ union YYSTYPE
     char * texte;
     int valeur_entiere;
 
-#line 91 "parser.tab.hpp" /* yacc.c:1909  */
+#line 95 "parser.tab.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
