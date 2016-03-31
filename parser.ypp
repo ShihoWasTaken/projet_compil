@@ -57,14 +57,24 @@ QPointer<monDessin> D;
 %token<valeur_entiere> LONGUEUR
 %token<valeur_entiere> HAUTEUR
 %token FIN_LIGNE
+%token HASHTAG
+%token COMMENTAIRE_MONO
+%token COMMENTAIRE_MULTI
+
 
 %type<texte> Forme
 
 %start Input
 %%
 Input: 
-	FIN_LIGNE
+
+	|FIN_LIGNE
+	{
+		std::cout << "Fin du parsing" << std::endl;
+	}
 	|FIN_LIGNE Input
+	|COMMENTAIRE_MONO Input
+	|COMMENTAIRE_MULTI Input
 	|syntaxe_monoligne Input
 	|syntaxe_multiligne Input
 	|syntaxe_identifiant Input

@@ -32,8 +32,8 @@ remplissage (plein|vide)
 {blancs}   { /* On ignore */ }
 
 "\n" { cout << "Trouvé un \\n(fin): " << endl; return(FIN_LIGNE);}
-{commentaire_multi} { cout << "Trouvé un commentaire multiligne: " << yytext << endl; }
-{commentaire_mono} { cout << "Trouvé un commentaire monoligne: " << yytext << endl; }
+{commentaire_multi} { cout << "Trouvé un commentaire multiligne: " << yytext << endl; return(COMMENTAIRE_MULTI); }
+{commentaire_mono} { cout << "Trouvé un commentaire monoligne: " << yytext << endl; return(COMMENTAIRE_MONO);}
 
 {entier}    {
 				yylval.valeur_entiere = atoi(yytext);
@@ -74,4 +74,5 @@ remplissage (plein|vide)
 "["	{ cout << "Trouvé un crochet: " << yytext << endl; return(CROCHET_OUVRANT);}
 "]"	{ cout << "Trouvé un crochet: " << yytext << endl; return(CROCHET_FERMANT); }
 "="	{ cout << "Trouvé un égal: " << yytext << endl; return(EGAL); }
+"#"	{ cout << "Trouvé un hashtag: " << yytext << endl; return(HASHTAG); }
 %%

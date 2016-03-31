@@ -17,4 +17,3 @@ Commentaire multiligne
 LigNe l1(1, 1, 50, 50)
 l1[épaisseur] = 4
 l1[couleur] = bleu
-
