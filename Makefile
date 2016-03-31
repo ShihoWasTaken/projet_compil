@@ -285,7 +285,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/Projet\ 2015-20161.0.0 || mkdir -p .tmp/Projet\ 2015-20161.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/Projet\ 2015-20161.0.0/ && $(COPY_FILE) --parents global.h monDessin.h parser.tab.hpp forme.h cercle.h rectangle.h ligne.h remplissage.h .tmp/Projet\ 2015-20161.0.0/ && $(COPY_FILE) --parents lex.yy.c main.cpp monDessin.cpp cercle.cpp rectangle.cpp ligne.cpp .tmp/Projet\ 2015-20161.0.0/ && (cd `dirname .tmp/Projet\ 2015-20161.0.0` && $(TAR) Projet\ 2015-20161.0.0.tar Projet\ 2015-20161.0.0 && $(COMPRESS) Projet\ 2015-20161.0.0.tar) && $(MOVE) `dirname .tmp/Projet\ 2015-20161.0.0`/Projet\ 2015-20161.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Projet\ 2015-20161.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/Projet\ 2015-20161.0.0/ && $(COPY_FILE) --parents global.h monDessin.h parser.tab.hpp forme.h cercle.h rectangle.h ligne.h filling.h .tmp/Projet\ 2015-20161.0.0/ && $(COPY_FILE) --parents lex.yy.c main.cpp monDessin.cpp cercle.cpp rectangle.cpp ligne.cpp .tmp/Projet\ 2015-20161.0.0/ && (cd `dirname .tmp/Projet\ 2015-20161.0.0` && $(TAR) Projet\ 2015-20161.0.0.tar Projet\ 2015-20161.0.0 && $(COMPRESS) Projet\ 2015-20161.0.0.tar) && $(MOVE) `dirname .tmp/Projet\ 2015-20161.0.0`/Projet\ 2015-20161.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Projet\ 2015-20161.0.0
 
 
 clean:compiler_clean 
@@ -618,7 +618,7 @@ moc_monDessin.cpp: /usr/include/qt5/QtGui/QtGui \
 		/usr/include/qt5/QtWidgets/qtabwidget.h \
 		forme.h \
 		/usr/include/qt5/QtGui/QColor \
-		remplissage.h \
+		filling.h \
 		rectangle.h \
 		cercle.h \
 		ligne.h \
@@ -951,7 +951,7 @@ main.o: main.cpp parser.tab.cpp \
 		/usr/include/qt5/QtWidgets/qtabwidget.h \
 		forme.h \
 		/usr/include/qt5/QtGui/QColor \
-		remplissage.h \
+		filling.h \
 		rectangle.h \
 		cercle.h \
 		ligne.h \
@@ -1268,7 +1268,7 @@ monDessin.o: monDessin.cpp monDessin.h \
 		/usr/include/qt5/QtWidgets/qtabwidget.h \
 		forme.h \
 		/usr/include/qt5/QtGui/QColor \
-		remplissage.h \
+		filling.h \
 		rectangle.h \
 		cercle.h \
 		ligne.h
@@ -1341,7 +1341,7 @@ cercle.o: cercle.cpp cercle.h \
 		/usr/include/qt5/QtCore/qpair.h \
 		/usr/include/qt5/QtCore/qregexp.h \
 		/usr/include/qt5/QtCore/qstringmatcher.h \
-		remplissage.h
+		filling.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cercle.o cercle.cpp
 
 rectangle.o: rectangle.cpp rectangle.h \
@@ -1411,7 +1411,7 @@ rectangle.o: rectangle.cpp rectangle.h \
 		/usr/include/qt5/QtCore/qpair.h \
 		/usr/include/qt5/QtCore/qregexp.h \
 		/usr/include/qt5/QtCore/qstringmatcher.h \
-		remplissage.h
+		filling.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rectangle.o rectangle.cpp
 
 ligne.o: ligne.cpp ligne.h \
@@ -1481,7 +1481,7 @@ ligne.o: ligne.cpp ligne.h \
 		/usr/include/qt5/QtCore/qpair.h \
 		/usr/include/qt5/QtCore/qregexp.h \
 		/usr/include/qt5/QtCore/qstringmatcher.h \
-		remplissage.h
+		filling.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ligne.o ligne.cpp
 
 moc_monDessin.o: moc_monDessin.cpp 

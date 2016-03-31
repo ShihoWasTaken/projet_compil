@@ -18,39 +18,28 @@ monDessin::~monDessin()
 
 void monDessin::paintEvent(QPaintEvent *event)
 {
-	// On caste en string
-	cout << "taille du vecteur = " << m_formes.size() << endl;
-
-	QRect rect = event->rect();
-
-
-		Cercle * C = dynamic_cast<Cercle *> (new Forme(0,0));
-
-		Rectangle * R = dynamic_cast<Rectangle *> (new Forme(0,0));
-
-		Ligne * L = dynamic_cast<Ligne *> (new Forme(0,0));
-		// On parcourt le vecteur de Formes
-	    for (Forme * forme : m_formes ) 
+	// On parcourt le vecteur de Formes
+    for (Forme * forme : m_formes ) 
+	{
+		// On caste la forme en les 3 classes filles
+		// Cela permet de retrouver son "type"
+		// Si le cast échoue, le pointeur vaudra null
+		Cercle * C = dynamic_cast<Cercle *> (forme);
+		Rectangle * R = dynamic_cast<Rectangle *> (forme);
+		Ligne * L = dynamic_cast<Ligne *> (forme);
+		if(C != nullptr)
 		{
-			// On caste la forme en les 3 classes filles
-			// Cela permet de retrouver son "type"
-			// Si le cast échoue, le pointeur vaudra null
-			Cercle * C = dynamic_cast<Cercle *> (forme);
-			Rectangle * R = dynamic_cast<Rectangle *> (forme);
-			Ligne * L = dynamic_cast<Ligne *> (forme);
-			if(C != nullptr)
-			{
-				dessinerCercle(C);
-			}
-			else if(R != nullptr)
-			{
-				dessinerRectangle(R);
-			}
-			else if(L != nullptr)
-			{
-				dessinerLigne(L);
-			}
+			dessinerCercle(C);
 		}
+		else if(R != nullptr)
+		{
+			dessinerRectangle(R);
+		}
+		else if(L != nullptr)
+		{
+			dessinerLigne(L);
+		}
+	}
 }
 
 void monDessin::dessinerRectangle(Rectangle *rectangle)

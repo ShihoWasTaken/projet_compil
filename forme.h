@@ -3,7 +3,7 @@
 
 #include <QColor>
 
-#include "remplissage.h"
+#include "filling.h"
 
 class Forme {
 	protected:
