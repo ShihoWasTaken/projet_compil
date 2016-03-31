@@ -82,7 +82,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 27 "parser.ypp" /* yacc.c:1909  */
+#line 28 "parser.ypp" /* yacc.c:1909  */
 
     char * texte;
     int valeur_entiere;

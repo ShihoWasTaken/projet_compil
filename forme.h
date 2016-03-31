@@ -49,7 +49,7 @@ class Forme
 			if(strcmp(s, "blanc") == 0)
 				this->color = QColor(255,255,255);
 			else if(strcmp(s, "bleu") == 0)
-				this->color = QColor(255,255,255);
+				this->color = QColor(0,0,255);
 			else if(strcmp(s, "gris") == 0)
 				this->color = QColor(127,127,127);
 			else if(strcmp(s, "jaune") == 0)

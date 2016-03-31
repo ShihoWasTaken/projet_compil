@@ -6,6 +6,7 @@
 #include "monDessin.h"
 #include <QtGui>
 #include <QApplication>
+#include <algorithm>
 
 #include "rectangle.h"
 #include "cercle.h"
@@ -77,27 +78,27 @@ Input:
 	|syntaxe_monoligne Input
 	|syntaxe_multiligne Input
 	|syntaxe_identifiant Input
+	|option_identifiant Input
 	|syntaxe_fenetre Input
 
 syntaxe_monoligne: 
-	Forme PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE ACCOLADE_OUVRANTE COLOR VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE
+	Instanciation ACCOLADE_OUVRANTE COLOR VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE
 	{
-		Rectangle *r = new Rectangle($3,$5,$7,$9);
-		std::cout << "Filling = " << $16 << std::endl;
-		if (strcmp($16,"plein") == 0)
+		// On récupère la forme courante pour appliquer les options
+		Forme *f = D->currentShape();
+		f->set_color($3);
+		f->set_thickness($5);
+		if (strcmp($7,"plein") == 0)
 		{
-			std::cout << "On remplit = " << $16 << std::endl;
-			r->set_filling(PLEIN);
+			std::cout << "On remplit = " << $3 << std::endl;
+			f->set_filling(PLEIN);
 		}
-		D->m_formes.push_back(r);
+		f->set_rotation($9);
+		f->set_opacity($12);
 	}
 
 syntaxe_multiligne: 
-	Forme PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE ACCOLADE_OUVRANTE FIN_LIGNE
-	{
-		Cercle *c = new Cercle($3,$5,$7);
-		D->m_formes.push_back(c);
-	}
+	Instanciation ACCOLADE_OUVRANTE FIN_LIGNE
 	Option_multiligne
 	Option_multiligne
 	Option_multiligne
@@ -142,13 +143,15 @@ Option_multiligne:
 	}
 
 syntaxe_identifiant: 
-	Forme IDENTIFICATEUR PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE FIN_LIGNE
-	IDENTIFICATEUR CROCHET_OUVRANT EPAISSEUR CROCHET_FERMANT EGAL ENTIER FIN_LIGNE
-	IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR		
+	Forme IDENTIFICATEUR PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE FIN_LIGNE	
 	{
 		Ligne *l = new Ligne($4,$6,$8,$10);
 		D->m_formes.push_back(l);
 	}
+
+option_identifiant:
+	IDENTIFICATEUR CROCHET_OUVRANT EPAISSEUR CROCHET_FERMANT EGAL ENTIER
+	|IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR
 
 syntaxe_fenetre:
 	FENETRE CROCHET_OUVRANT LONGUEUR CROCHET_FERMANT EGAL ENTIER
@@ -165,9 +168,32 @@ syntaxe_fenetre:
 
 Forme:
 	RECTANGLE
-	|CERCLE
 	|LIGNE
 
+
+
+Instanciation:
+	CERCLE PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE
+	{
+		Cercle *c = new Cercle($3,$5,$7);
+		D->m_formes.push_back(c);
+	}
+	|Forme PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE
+	{
+		std::string nomForme($1);
+		std::transform(nomForme.begin(), nomForme.end(), nomForme.begin(), ::tolower);
+
+		if(nomForme == "rectangle")
+		{
+			Rectangle *r = new Rectangle($3,$5,$7,$9);
+			D->m_formes.push_back(r);	
+		}
+		else if(nomForme == "ligne")
+		{
+			Ligne *l = new Ligne($3,$5,$7,$9);
+			D->m_formes.push_back(l);
+		}
+	}
 
 %%
 
