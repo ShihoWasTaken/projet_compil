@@ -51,7 +51,7 @@ void monDessin::dessinerImage(Image * image)
 {
 	// On définit le painter
 	QPainter painter(this);
-	
+
 	// On tente de créer une QImage à partir du chemin passé en paramètre
 	QImage img(image->get_QPath());
 
@@ -75,6 +75,9 @@ void monDessin::dessinerRectangle(Rectangle *rectangle)
 	// Couleur RBGA gérant l'opacité
 	pen.setBrush(rectangle->get_color_alpha());
 
+	// On effectue la rotation
+	painter.rotate(rectangle->get_rotation());
+
 	// On fixe l'épaisseur du pen
 	pen.setWidth(rectangle->get_thickness());
 
@@ -90,8 +93,6 @@ void monDessin::dessinerRectangle(Rectangle *rectangle)
 	// On dessine un rectangle
 	painter.drawRect(rectangle->get_x(), rectangle->get_y(), rectangle->get_length(), rectangle->get_width());
 
-	// On effectue la rotation
-	painter.rotate(rectangle->get_rotation());
 }
 
 void monDessin::dessinerCercle(Cercle *cercle)
@@ -102,6 +103,9 @@ void monDessin::dessinerCercle(Cercle *cercle)
 	
 	// Couleur RBGA gérant l'opacité
 	pen.setBrush(cercle->get_color_alpha());
+
+	// On effectue la rotation
+	painter.rotate(cercle->get_rotation());
 
 	// On fixe l'épaisseur du pen
 	pen.setWidth(cercle->get_thickness());
@@ -117,9 +121,6 @@ void monDessin::dessinerCercle(Cercle *cercle)
 
 	// On dessine un cercle (ellipse avec 2 même radius)
 	painter.drawEllipse(cercle->get_x()-cercle->get_radius(), cercle->get_y()-cercle->get_radius(), cercle->get_radius() * 2, cercle->get_radius() * 2);
-
-	// On effectue la rotation
-	painter.rotate(cercle->get_rotation());
 }
 
 
@@ -131,6 +132,9 @@ void monDessin::dessinerLigne(Ligne *ligne)
 	
 	// Couleur RBGA gérant l'opacité
 	pen.setBrush(ligne->get_color_alpha());
+
+	// On effectue la rotation
+	painter.rotate(ligne->get_rotation());
 
 	// On fixe l'épaisseur du pen
 	pen.setWidth(ligne->get_thickness());
@@ -146,7 +150,4 @@ void monDessin::dessinerLigne(Ligne *ligne)
 
 	// On dessine la ligne
 	painter.drawLine(ligne->get_x(), ligne->get_y(), ligne->get_x_end(), ligne->get_y_end());
-
-	// On effectue la rotation
-	painter.rotate(ligne->get_rotation());
 }
