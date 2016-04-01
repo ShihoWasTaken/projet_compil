@@ -32,6 +32,8 @@ Fenetre[couleur] = #127,255,212
 
 Image(0,0,pikachu.jpg)
 
+// Forme(attributs)(nombre_iteration,decalage_x,decalage_y){options}
 boucler{
-	Rectangle(10, 15, 20, 25)(5,50,50){rouge, 5, plein, 90°, 50%}
+	Rectangle(500, 30, 20, 25)(5,30,5){#255,160,122, 1, plein, 90°, 80%}
+	Cercle(500, 300, 50)(5,80,0){jaune, 5, plein, 90°, 70%}
 }

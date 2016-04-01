@@ -224,24 +224,8 @@ syntaxe_image:
 
 syntaxe_boucle:
 	BOUCLER ACCOLADE_OUVRANTE FIN_LIGNE
-	Instanciation_boucle ACCOLADE_OUVRANTE Color VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE FIN_LIGNE
+	ligne_boucle
 	ACCOLADE_FERMANTE
-	{
-		Forme *f;
-		for(int i = 0; i < $4; i++)
-		{
-			// On récupère la forme courante pour appliquer les options
-			f = D->currentShape(i);
-			f->set_color($6);
-			f->set_thickness($8);
-			if (strcmp($10,"plein") == 0)
-			{
-				f->set_filling(PLEIN);
-			}
-			f->set_rotation($12);
-			f->set_opacity($15);	
-		}
-	}
 
 Forme:
 	RECTANGLE
@@ -323,6 +307,27 @@ Instanciation_boucle:
 		// On retourne le nombre d'itérations pour pouvoir traiter les options
 		$$ = $12;
 	}	
+
+ligne_boucle:
+	
+	|Instanciation_boucle ACCOLADE_OUVRANTE Color VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE FIN_LIGNE
+	{
+		Forme *f;
+		for(int i = 0; i < $1; i++)
+		{
+			// On récupère la forme courante pour appliquer les options
+			f = D->currentShape(i);
+			f->set_color($3);
+			f->set_thickness($5);
+			if (strcmp($7,"plein") == 0)
+			{
+				f->set_filling(PLEIN);
+			}
+			f->set_rotation($9);
+			f->set_opacity($12);	
+		}
+	}
+	ligne_boucle
 
 %%
 
