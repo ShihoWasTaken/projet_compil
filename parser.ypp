@@ -207,18 +207,9 @@ syntaxe_fenetre:
 	}
 
 syntaxe_image:
-	IMAGE PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE IDENTIFICATEUR DOT EXT_IMG PARENTHESE_FERMANTE
+	IMAGE PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE PATH PARENTHESE_FERMANTE
 	{
-		std::string nom = $7;
-		std::string ext = $9;
-
-		nom += ".";
-		nom += $9;
-
-		char * path = (char *) nom.c_str();
-
-		std::cout << "path = " << path << std::endl;
-		Image *i = new Image($3,$5,path);
+		Image *i = new Image($3,$5,$7);
 		D->m_formes.push_back(i);
 	}
 

@@ -25,10 +25,11 @@ rectangle			(r|R)(e|E)(c|C)(t|T)(a|A)(n|N)(g|G)(l|L)(e|E)
 cercle				(c|C)(e|E)(r|R)(c|C)(l|L)(e|E)
 image				(i|I)(m|M)(a|A)(g|G)(e|E)
 
-path 				^.*\.(jpg|JPG|png|PNG)$
-extension			(jpg|JPG|png|PNG)
+identificateur		([a-z])([a-z]|[A-Z]|{chiffre})*
+string				[a-zA-Z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]+
 
-identificateur 		[A-Za-z]([a-z]|[A-Z]|[0-9])*
+extension			(jpg|JPG|png|PNG)
+path 				{string}[{string}| ]*[.]{extension}
 
 couleur (rouge|vert|bleu|jaune|noir|blanc|gris)
 remplissage (plein|vide)
@@ -58,7 +59,6 @@ boucler				(b|B)(o|O)(u|U)(c|C)(l|L)(e|E)(r|R)
 
 
 {extension} { yylval.texte = strdup(yytext); yylval.texte = strdup(yytext); return(EXT_IMG); }
-{path}(.jpg) { yylval.texte = strdup(yytext); return(PATH); }
 
 
 (e|é|E|É)(p|P)(a|A)(i|I)(s|S){2}(e|E)(u|U)(r|R) { cout << "Trouvé une épaisseur: " << yytext << endl; return(EPAISSEUR); }
@@ -78,6 +78,8 @@ boucler				(b|B)(o|O)(u|U)(c|C)(l|L)(e|E)(r|R)
 {couleur} { cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLORNAME);}
 {remplissage} { cout << "Trouvé un remplissage: " << yytext << endl; yylval.texte = strdup(yytext); return(FILLING);}
 
+
+{path} { cout << "Trouvé un path: " << yytext << endl; yylval.texte = strdup(yytext); return(PATH); }
 {identificateur} { cout << "Trouvé un identificateur: " << yytext << endl; yylval.texte = strdup(yytext); return(IDENTIFICATEUR); }
 
 "." { cout << "Trouvé un point: " << yytext << endl; yylval.texte = strdup(yytext); return(DOT); }
