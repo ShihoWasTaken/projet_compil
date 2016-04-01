@@ -25,6 +25,12 @@ l1[rotation] = 50°
 l1[remplissage] = plein
 l1[opacité] = 90%
 
+LigNe l2(810, 350, 450, 450)
+l2[épaisseur] = l1[épaisseur]
+l2[couleur] = l1[couleur]
+l2[rotation] = l1[rotation]
+l2[remplissage] = l1[remplissage]
+l2[opacité] = l1[opacité]
 
 Fenetre[longueur] = 1280
 Fenetre[hauteur] = 720
