@@ -5,7 +5,8 @@
 
 #include "forme.h"
 
-class Rectangle : virtual public Forme {
+class Rectangle : virtual public Forme
+{
 	private:
 		int length;
 		int height;
@@ -18,10 +19,6 @@ class Rectangle : virtual public Forme {
 		
 		void set_length(int length) { this->length = length; }
 		void set_height(int height) { this->height = height; }
-
-		std::ostream& print(std::ostream& out) const;
-
-		friend std::ostream& operator<<(std::ostream& out, const Rectangle & r) { return r.print(out); }
 		
 		~Rectangle() {};
 };

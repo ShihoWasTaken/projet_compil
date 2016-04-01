@@ -104,7 +104,7 @@ class monDessin:public QWidget
 		std::vector<Forme *> m_formes;	// Vecteur contenant toutes les formes à afficher
 		int m_longueur;					// Longueur de la fenêtre
 		int m_hauteur;					// Hauteur de la fenêtre
-		QColor color;				// COuleur de la fenêtre
+		QColor color;					// COuleur de la fenêtre
 
 };
 

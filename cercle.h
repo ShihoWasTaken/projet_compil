@@ -5,7 +5,8 @@
 
 #include "forme.h"
 
-class Cercle : virtual public Forme {
+class Cercle : virtual public Forme
+{
 	private:
 		int radius;
 	
@@ -15,10 +16,6 @@ class Cercle : virtual public Forme {
 		int get_radius() { return radius; }
 		
 		void set_radius(int radius) { this->radius = radius; }
-
-		std::ostream& print(std::ostream& out) const;
-
-		friend std::ostream& operator<<(std::ostream& out, const Cercle & c) { return c.print(out); }
 		
 		~Cercle() {};
 };

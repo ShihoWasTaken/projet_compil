@@ -5,7 +5,8 @@
 
 #include "forme.h"
 
-class Ligne : virtual public Forme {
+class Ligne : virtual public Forme
+{
 	private:
 		int x_end;
 		int y_end;
@@ -18,10 +19,6 @@ class Ligne : virtual public Forme {
 		
 		void set_x_end(int x_end) { this->x_end = x_end; }
 		void set_y_end(int y_end) { this->y_end = y_end; }
-
-		std::ostream& print(std::ostream& out) const;
-
-		friend std::ostream& operator<<(std::ostream& out, const Ligne & l) { return l.print(out); }
 		
 		~Ligne() {};
 };

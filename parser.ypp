@@ -30,21 +30,6 @@ QPointer<monDessin> D;
     int valeur_entiere;
 }
 
-%token<valeur_entiere> ENTIER
-%token<texte> CERCLE
-%token<texte> RECTANGLE
-%token<texte> LIGNE
-%token<texte> COULEUR
-%token<texte> COLORNAME
-%token<texte> RGBCOLOR
-%token<texte> FILLING
-
-%token<valeur_entiere> EPAISSEUR
-%token<texte> NOM_COULEUR
-%token<valeur_entiere> OPACITE
-%token<valeur_entiere> ROTATION
-%token<texte> REMPLISSAGE
-%token<texte> IDENTIFICATEUR
 %token VIRGULE
 %token DEGRE
 %token POURCENT
@@ -56,8 +41,6 @@ QPointer<monDessin> D;
 %token CROCHET_FERMANT
 %token EGAL
 %token FENETRE
-%token<valeur_entiere> LONGUEUR
-%token<valeur_entiere> HAUTEUR
 %token FIN_LIGNE
 %token HASHTAG
 %token COMMENTAIRE_MONO
@@ -67,6 +50,22 @@ QPointer<monDessin> D;
 %token<texte> DOT
 %token<texte> EXT_IMG
 %token<texte> BOUCLER
+%token<texte> CERCLE
+%token<texte> RECTANGLE
+%token<texte> LIGNE
+%token<texte> COULEUR
+%token<texte> COLORNAME
+%token<texte> RGBCOLOR
+%token<texte> FILLING
+%token<texte> NOM_COULEUR
+%token<texte> REMPLISSAGE
+%token<texte> IDENTIFICATEUR
+%token<valeur_entiere> EPAISSEUR
+%token<valeur_entiere> ENTIER
+%token<valeur_entiere> OPACITE
+%token<valeur_entiere> ROTATION
+%token<valeur_entiere> LONGUEUR
+%token<valeur_entiere> HAUTEUR
 
 %type<texte> Color
 %type<texte> Forme
@@ -99,7 +98,6 @@ syntaxe_monoligne:
 		f->set_thickness($5);
 		if (strcmp($7,"plein") == 0)
 		{
-			std::cout << "On remplit = " << $3 << std::endl;
 			f->set_filling(PLEIN);
 		}
 		f->set_rotation($9);
@@ -610,11 +608,34 @@ ligne_boucle:
 %%
 
 
-void trace(QMainWindow * w){
-	yyin = fopen("forme.txt", "r");
+void trace(QMainWindow * w, int argc , char ** argv ){
+	// Si on passe un argument au programme
+	if(argc > 1)
+	{
+		// On essaye d'ouvrir le fichier qui a pour chemin et argument
+		yyin = fopen(argv[1], "r");
+		// Si on échoue, on quitte le programme avec un message d'erreur
+		if(yyin == nullptr)
+		{
+			std::cout << "Erreur - Le fichier passé en argument du programme est invalide" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+	// Sinon on lit le fichier par défaut
+	{
+		yyin = fopen("forme.txt", "r");
+		// Si on échoue, on quitte le programme avec un message d'erreur
+		if(yyin == nullptr)
+		{
+			std::cout << "Impossible de trouver le fichier à parser par défaut(forme.txt)" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+
 	D = new monDessin;	
 	w->setCentralWidget(D);
-    	w->setMinimumSize(800, 600);
+    w->setMinimumSize(800, 600);
+
     // On remplit les attributs au cas où ils ne sont pas fournis dans le fichier texte
     D->m_longueur = 800;
     D->m_hauteur = 600;
@@ -628,6 +649,7 @@ void trace(QMainWindow * w){
 	w->setAutoFillBackground(true);
 	w->setPalette(Pal);
 
+	// On redimensionne la fenêtre
 	w->resize(D->m_longueur, D->m_hauteur);
 	D->draw();
 	w->show();

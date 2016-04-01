@@ -1059,7 +1059,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 39 "parser.lex"
+#line 30 "parser.lex"
 
 
 #line 1066 "lex.yy.c"
@@ -1157,191 +1157,187 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 41 "parser.lex"
+#line 32 "parser.lex"
 { /* On ignore */ }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 43 "parser.lex"
-{ cout << "Trouvé un \\n(fin): " << endl; return(FIN_LIGNE);}
+#line 33 "parser.lex"
+{ return(FIN_LIGNE);}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 44 "parser.lex"
-{ cout << "Trouvé un commentaire multiligne: " << yytext << endl; return(COMMENTAIRE_MULTI); }
+#line 34 "parser.lex"
+{ return(COMMENTAIRE_MULTI); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 45 "parser.lex"
-{ cout << "Trouvé un commentaire monoligne: " << yytext << endl; return(COMMENTAIRE_MONO);}
+#line 35 "parser.lex"
+{ return(COMMENTAIRE_MONO);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 47 "parser.lex"
-{
-				yylval.valeur_entiere = atoi(yytext);
-				cout << "Trouvé un entier: " << yytext << endl;
-				return(ENTIER);
-		    }
+#line 36 "parser.lex"
+{ yylval.valeur_entiere = atoi(yytext);	return(ENTIER); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 53 "parser.lex"
+#line 37 "parser.lex"
 { yylval.texte = strdup(yytext); return(CERCLE); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 54 "parser.lex"
+#line 38 "parser.lex"
 { yylval.texte = strdup(yytext); return(RECTANGLE); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 55 "parser.lex"
+#line 39 "parser.lex"
 { yylval.texte = strdup(yytext); return(LIGNE); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 56 "parser.lex"
+#line 40 "parser.lex"
 { yylval.texte = strdup(yytext); return(IMAGE); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 57 "parser.lex"
+#line 41 "parser.lex"
 { yylval.texte = strdup(yytext); return(BOUCLER); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 61 "parser.lex"
+#line 42 "parser.lex"
 { yylval.texte = strdup(yytext); yylval.texte = strdup(yytext); return(EXT_IMG); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 64 "parser.lex"
-{ cout << "Trouvé une épaisseur: " << yytext << endl; return(EPAISSEUR); }
+#line 43 "parser.lex"
+{ return(EPAISSEUR); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 65 "parser.lex"
-{ cout << "Trouvé une couleur: " << yytext << endl; return(COULEUR); }
+#line 44 "parser.lex"
+{ return(COULEUR); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 66 "parser.lex"
-{ cout << "Trouvé une opacité: " << yytext << endl; return(OPACITE); }
+#line 45 "parser.lex"
+{ return(OPACITE); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 67 "parser.lex"
-{ cout << "Trouvé une rotation: " << yytext << endl; return(ROTATION);  }
+#line 46 "parser.lex"
+{ return(ROTATION);  }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 68 "parser.lex"
-{ cout << "Trouvé un remplissage: " << yytext << endl; return(REMPLISSAGE); }
+#line 47 "parser.lex"
+{ return(REMPLISSAGE); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 70 "parser.lex"
-{ cout << "Trouvé une fenêtre: " << yytext << endl; return(FENETRE); }
+#line 48 "parser.lex"
+{ return(FENETRE); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 71 "parser.lex"
-{ cout << "Trouvé une longueur: " << yytext << endl; return(LONGUEUR); }
+#line 49 "parser.lex"
+{ return(LONGUEUR); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 72 "parser.lex"
-{ cout << "Trouvé une hauteur: " << yytext << endl; return(HAUTEUR); }
+#line 50 "parser.lex"
+{ return(HAUTEUR); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 78 "parser.lex"
-{ cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLORNAME);}
+#line 51 "parser.lex"
+{ yylval.texte = strdup(yytext); return(COLORNAME);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 79 "parser.lex"
-{ cout << "Trouvé un remplissage: " << yytext << endl; yylval.texte = strdup(yytext); return(FILLING);}
+#line 52 "parser.lex"
+{ yylval.texte = strdup(yytext); return(FILLING);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 82 "parser.lex"
-{ cout << "Trouvé un path: " << yytext << endl; yylval.texte = strdup(yytext); return(PATH); }
+#line 53 "parser.lex"
+{ yylval.texte = strdup(yytext); return(PATH); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 83 "parser.lex"
-{ cout << "Trouvé un identificateur: " << yytext << endl; yylval.texte = strdup(yytext); return(IDENTIFICATEUR); }
+#line 54 "parser.lex"
+{ yylval.texte = strdup(yytext); return(IDENTIFICATEUR); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 85 "parser.lex"
-{ cout << "Trouvé un point: " << yytext << endl; yylval.texte = strdup(yytext); return(DOT); }
+#line 55 "parser.lex"
+{ yylval.texte = strdup(yytext); return(DOT); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 86 "parser.lex"
-{ cout << "Trouvé une virgule: " << yytext << endl; yylval.texte = strdup(yytext); return(VIRGULE); }
+#line 56 "parser.lex"
+{ yylval.texte = strdup(yytext); return(VIRGULE); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 87 "parser.lex"
-{ cout << "Trouvé un degré: " << "\xc2\xb0" << endl; return(DEGRE); }
+#line 57 "parser.lex"
+{ return(DEGRE); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 88 "parser.lex"
-{ cout << "Trouvé un %: " << yytext << endl; return(POURCENT); }
+#line 58 "parser.lex"
+{ return(POURCENT); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 89 "parser.lex"
-{ cout << "Trouvé une paranthèse: " << yytext << endl; return(PARENTHESE_OUVRANTE); }
+#line 59 "parser.lex"
+{ return(PARENTHESE_OUVRANTE); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 90 "parser.lex"
-{ cout << "Trouvé une paranthèse: " << yytext << endl; return(PARENTHESE_FERMANTE); }
+#line 60 "parser.lex"
+{ return(PARENTHESE_FERMANTE); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 91 "parser.lex"
-{ cout << "Trouvé une accolade: " << yytext << endl; return(ACCOLADE_OUVRANTE); }
+#line 61 "parser.lex"
+{ return(ACCOLADE_OUVRANTE); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 92 "parser.lex"
-{ cout << "Trouvé une accolade: " << yytext << endl; return(ACCOLADE_FERMANTE); }
+#line 62 "parser.lex"
+{ return(ACCOLADE_FERMANTE); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 93 "parser.lex"
-{ cout << "Trouvé un crochet: " << yytext << endl; return(CROCHET_OUVRANT);}
+#line 63 "parser.lex"
+{ return(CROCHET_OUVRANT);}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 94 "parser.lex"
-{ cout << "Trouvé un crochet: " << yytext << endl; return(CROCHET_FERMANT); }
+#line 64 "parser.lex"
+{ return(CROCHET_FERMANT); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 95 "parser.lex"
-{ cout << "Trouvé un égal: " << yytext << endl; return(EGAL); }
+#line 65 "parser.lex"
+{ return(EGAL); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 96 "parser.lex"
-{ cout << "Trouvé un hashtag: " << yytext << endl; yylval.texte = strdup(yytext); return(HASHTAG); }
+#line 66 "parser.lex"
+{ yylval.texte = strdup(yytext); return(HASHTAG); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 97 "parser.lex"
+#line 67 "parser.lex"
 ECHO;
 	YY_BREAK
-#line 1345 "lex.yy.c"
+#line 1341 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2310,6 +2306,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 97 "parser.lex"
+#line 67 "parser.lex"
 
 

@@ -1,10 +1,10 @@
-Rectangle(10, 15, 20, 25){rouge, 5, plein, 90°, 50%}
+Rectangle(210, 215, 20, 25){rouge, 5, plein, 90°, 50%}
 
 Ligne(350, 85, 850, 85){bleu, 15, vide, 90°, 50%}
 
-Cercle(80, 40, 50){jaune, 5, plein, 90°, 50%}
+Cercle(780, 240, 50){jaune, 5, plein, 90°, 50%}
 
-CERCLE(301, 301, 50){
+CERCLE(501, 601, 50){
 couleur = rouge
 rotation = 50°
 remplissage = plein
@@ -18,9 +18,9 @@ opacité = 90%
 Commentaire multiligne
 */
 
-LigNe l1(410, 350, 50, 50)
+LigNe l1(410, 350, 550, 550)
 l1[épaisseur] = 4
-l1[couleur] = bleu
+l1[couleur] = rouge
 l1[rotation] = 50°
 l1[remplissage] = plein
 l1[opacité] = 90%

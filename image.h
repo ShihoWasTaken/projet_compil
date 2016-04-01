@@ -20,10 +20,6 @@ class Image : virtual public Forme
 
 		QString get_QPath() { return QPath; }
 		void set_QPath(QString QPath) { this->QPath = QPath; }
-
-		std::ostream& print(std::ostream& out) const;
-
-		friend std::ostream& operator<<(std::ostream& out, const Image & l) { return l.print(out); }
 		
 		~Image() {};
 };

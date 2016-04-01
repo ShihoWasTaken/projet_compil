@@ -76,7 +76,7 @@ void monDessin::dessinerRectangle(Rectangle *rectangle)
 	pen.setBrush(rectangle->get_color_alpha());
 
 	// On effectue la rotation
-	painter.rotate(rectangle->get_rotation());
+	//painter.rotate(rectangle->get_rotation());
 
 	// On fixe l'épaisseur du pen
 	pen.setWidth(rectangle->get_thickness());
@@ -105,7 +105,7 @@ void monDessin::dessinerCercle(Cercle *cercle)
 	pen.setBrush(cercle->get_color_alpha());
 
 	// On effectue la rotation
-	painter.rotate(cercle->get_rotation());
+	//painter.rotate(cercle->get_rotation());
 
 	// On fixe l'épaisseur du pen
 	pen.setWidth(cercle->get_thickness());
@@ -134,7 +134,7 @@ void monDessin::dessinerLigne(Ligne *ligne)
 	pen.setBrush(ligne->get_color_alpha());
 
 	// On effectue la rotation
-	painter.rotate(ligne->get_rotation());
+	//painter.rotate(ligne->get_rotation());
 
 	// On fixe l'épaisseur du pen
 	pen.setWidth(ligne->get_thickness());
