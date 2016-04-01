@@ -33,6 +33,8 @@ identificateur 		[A-Za-z]([a-z]|[A-Z]|[0-9])*
 couleur (rouge|vert|bleu|jaune|noir|blanc|gris)
 remplissage (plein|vide)
 
+boucler				(b|B)(o|O)(u|U)(c|C)(l|L)(e|E)(r|R)
+
 %%
 
 {blancs}   { /* On ignore */ }
@@ -51,6 +53,8 @@ remplissage (plein|vide)
 {rectangle} { yylval.texte = strdup(yytext); return(RECTANGLE); }
 {ligne} { yylval.texte = strdup(yytext); return(LIGNE); }
 {image} { yylval.texte = strdup(yytext); return(IMAGE); }
+{boucler} { yylval.texte = strdup(yytext); return(BOUCLER); }
+
 
 
 {extension} { yylval.texte = strdup(yytext); yylval.texte = strdup(yytext); return(EXT_IMG); }

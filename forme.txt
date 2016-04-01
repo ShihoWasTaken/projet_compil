@@ -31,3 +31,7 @@ Fenetre[hauteur] = 720
 Fenetre[couleur] = #127,255,212
 
 Image(0,0,pikachu.jpg)
+
+boucler{
+	Rectangle(10, 15, 20, 25)(5,50,50){rouge, 5, plein, 90°, 50%}
+}

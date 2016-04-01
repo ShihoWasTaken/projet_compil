@@ -79,7 +79,8 @@ extern int yydebug;
     IMAGE = 289,
     PATH = 290,
     DOT = 291,
-    EXT_IMG = 292
+    EXT_IMG = 292,
+    BOUCLER = 293
   };
 #endif
 
@@ -93,7 +94,7 @@ union YYSTYPE
     char * texte;
     int valeur_entiere;
 
-#line 97 "parser.tab.hpp" /* yacc.c:1909  */
+#line 98 "parser.tab.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

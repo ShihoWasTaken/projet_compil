@@ -28,7 +28,7 @@ class monDessin:public QWidget
 		void dessinerCercle(Cercle *cercle);
 		void dessinerLigne(Ligne *ligne);
 		// On retourne la forme courante afin de pouvoir appliquer les options ensuite
-		Forme * currentShape()	{ return this->m_formes.at(this->m_formes.size()-1); }
+		Forme * currentShape(int index = 0)	{ return this->m_formes.at(this->m_formes.size()-1-index); }
 
 
 		void set_color(char *s)
