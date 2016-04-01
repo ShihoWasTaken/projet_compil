@@ -491,9 +491,9 @@ static const yytype_uint16 yyrline[] =
 {
        0,    79,    79,    82,    83,    84,    85,    86,    87,    88,
       89,    90,    91,    94,   110,   119,   125,   131,   140,   146,
-     154,   157,   178,   199,   220,   244,   265,   266,   267,   268,
-     269,   272,   276,   280,   286,   293,   298,   299,   302,   303,
-     323,   328,   346,   352,   371,   381,   403,   406,   405
+     154,   157,   178,   199,   220,   244,   265,   303,   341,   379,
+     417,   458,   462,   466,   472,   479,   484,   485,   488,   489,
+     509,   514,   532,   538,   557,   567,   589,   592,   591
 };
 #endif
 
@@ -1604,41 +1604,251 @@ yyreduce:
 #line 1605 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
+  case 26:
+#line 266 "parser.ypp" /* yacc.c:1646  */
+    {
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = (yyvsp[-8].texte);
+		std::string nom_variable_droite = (yyvsp[-3].texte);
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			int epaisseur = f->get_thickness();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_thickness(epaisseur);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
+#line 1647 "parser.tab.cpp" /* yacc.c:1646  */
+    break;
+
+  case 27:
+#line 304 "parser.ypp" /* yacc.c:1646  */
+    {
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = (yyvsp[-8].texte);
+		std::string nom_variable_droite = (yyvsp[-3].texte);
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			QColor color = f->get_color();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_color(color);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
+#line 1689 "parser.tab.cpp" /* yacc.c:1646  */
+    break;
+
+  case 28:
+#line 342 "parser.ypp" /* yacc.c:1646  */
+    {
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = (yyvsp[-8].texte);
+		std::string nom_variable_droite = (yyvsp[-3].texte);
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			int rotation = f->get_rotation();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_rotation(rotation);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
+#line 1731 "parser.tab.cpp" /* yacc.c:1646  */
+    break;
+
+  case 29:
+#line 380 "parser.ypp" /* yacc.c:1646  */
+    {
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = (yyvsp[-8].texte);
+		std::string nom_variable_droite = (yyvsp[-3].texte);
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			Filling remplissage = f->get_filling();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_filling(remplissage);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
+#line 1773 "parser.tab.cpp" /* yacc.c:1646  */
+    break;
+
+  case 30:
+#line 418 "parser.ypp" /* yacc.c:1646  */
+    {
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = (yyvsp[-8].texte);
+		std::string nom_variable_droite = (yyvsp[-3].texte);
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			int opacite = f->get_opacity();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_opacity(opacite);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
+#line 1815 "parser.tab.cpp" /* yacc.c:1646  */
+    break;
+
   case 31:
-#line 273 "parser.ypp" /* yacc.c:1646  */
+#line 459 "parser.ypp" /* yacc.c:1646  */
     {
 		D->m_longueur = (yyvsp[0].valeur_entiere);
 	}
-#line 1613 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1823 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 277 "parser.ypp" /* yacc.c:1646  */
+#line 463 "parser.ypp" /* yacc.c:1646  */
     {
 		D->m_hauteur = (yyvsp[0].valeur_entiere);
 	}
-#line 1621 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1831 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 281 "parser.ypp" /* yacc.c:1646  */
+#line 467 "parser.ypp" /* yacc.c:1646  */
     {
 		D->set_color((yyvsp[0].texte));
 	}
-#line 1629 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1839 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 287 "parser.ypp" /* yacc.c:1646  */
+#line 473 "parser.ypp" /* yacc.c:1646  */
     {
 		Image *i = new Image((yyvsp[-5].valeur_entiere),(yyvsp[-3].valeur_entiere),(yyvsp[-1].texte));
 		D->m_formes.push_back(i);
 	}
-#line 1638 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1848 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 304 "parser.ypp" /* yacc.c:1646  */
+#line 490 "parser.ypp" /* yacc.c:1646  */
     {
 		std::string str = "#";
 		std::string str2 = std::to_string((yyvsp[-4].valeur_entiere));
@@ -1656,20 +1866,20 @@ yyreduce:
 		// On retourne la chaine formatée Example: #255,255,255
 		(yyval.texte) = (char *) str.c_str();
 	}
-#line 1660 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1870 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 324 "parser.ypp" /* yacc.c:1646  */
+#line 510 "parser.ypp" /* yacc.c:1646  */
     {
 		Cercle *c = new Cercle((yyvsp[-5].valeur_entiere),(yyvsp[-3].valeur_entiere),(yyvsp[-1].valeur_entiere));
 		D->m_formes.push_back(c);
 	}
-#line 1669 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1879 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 329 "parser.ypp" /* yacc.c:1646  */
+#line 515 "parser.ypp" /* yacc.c:1646  */
     {
 		std::string nomForme((yyvsp[-9].texte));
 		std::transform(nomForme.begin(), nomForme.end(), nomForme.begin(), ::tolower);
@@ -1685,21 +1895,21 @@ yyreduce:
 			D->m_formes.push_back(l);
 		}
 	}
-#line 1689 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1899 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 347 "parser.ypp" /* yacc.c:1646  */
+#line 533 "parser.ypp" /* yacc.c:1646  */
     {
 		Cercle *c = new Cercle((yyvsp[-5].valeur_entiere),(yyvsp[-3].valeur_entiere),(yyvsp[-1].valeur_entiere));
 		D->m_formes.push_back(c);
 		D->variables[(yyvsp[-7].texte)] = D->currentIndex();
 	}
-#line 1699 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1909 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 353 "parser.ypp" /* yacc.c:1646  */
+#line 539 "parser.ypp" /* yacc.c:1646  */
     {
 		std::string nomForme((yyvsp[-10].texte));
 		std::transform(nomForme.begin(), nomForme.end(), nomForme.begin(), ::tolower);
@@ -1716,11 +1926,11 @@ yyreduce:
 		}
 		D->variables[(yyvsp[-9].texte)] = D->currentIndex();
 	}
-#line 1720 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1930 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 372 "parser.ypp" /* yacc.c:1646  */
+#line 558 "parser.ypp" /* yacc.c:1646  */
     {
 		for(int i = 0; i < (yyvsp[-5].valeur_entiere); i++)
 		{
@@ -1730,11 +1940,11 @@ yyreduce:
 		// On retourne le nombre d'itérations pour pouvoir traiter les options
 		(yyval.valeur_entiere) = (yyvsp[-5].valeur_entiere);
 	}
-#line 1734 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1944 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 382 "parser.ypp" /* yacc.c:1646  */
+#line 568 "parser.ypp" /* yacc.c:1646  */
     {
 		for(int i = 0; i < (yyvsp[-5].valeur_entiere); i++)
 		{
@@ -1755,11 +1965,11 @@ yyreduce:
 		// On retourne le nombre d'itérations pour pouvoir traiter les options
 		(yyval.valeur_entiere) = (yyvsp[-5].valeur_entiere);
 	}
-#line 1759 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1969 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 406 "parser.ypp" /* yacc.c:1646  */
+#line 592 "parser.ypp" /* yacc.c:1646  */
     {
 		Forme *f;
 		for(int i = 0; i < (yyvsp[-14].valeur_entiere); i++)
@@ -1776,11 +1986,11 @@ yyreduce:
 			f->set_opacity((yyvsp[-3].valeur_entiere));	
 		}
 	}
-#line 1780 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1990 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1784 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1994 "parser.tab.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2008,7 +2218,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 424 "parser.ypp" /* yacc.c:1906  */
+#line 610 "parser.ypp" /* yacc.c:1906  */
 
 
 

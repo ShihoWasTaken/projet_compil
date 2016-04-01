@@ -263,10 +263,196 @@ option_identifiant:
     	}
 	}
 	|IDENTIFICATEUR CROCHET_OUVRANT EPAISSEUR CROCHET_FERMANT EGAL IDENTIFICATEUR CROCHET_OUVRANT EPAISSEUR CROCHET_FERMANT
+	{
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = $1;
+		std::string nom_variable_droite = $6;
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			int epaisseur = f->get_thickness();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_thickness(epaisseur);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
 	|IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT
+	{
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = $1;
+		std::string nom_variable_droite = $6;
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			QColor color = f->get_color();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_color(color);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
 	|IDENTIFICATEUR CROCHET_OUVRANT ROTATION CROCHET_FERMANT EGAL IDENTIFICATEUR CROCHET_OUVRANT ROTATION CROCHET_FERMANT
+	{
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = $1;
+		std::string nom_variable_droite = $6;
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			int rotation = f->get_rotation();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_rotation(rotation);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
 	|IDENTIFICATEUR CROCHET_OUVRANT REMPLISSAGE CROCHET_FERMANT EGAL IDENTIFICATEUR CROCHET_OUVRANT REMPLISSAGE CROCHET_FERMANT
+	{
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = $1;
+		std::string nom_variable_droite = $6;
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			Filling remplissage = f->get_filling();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_filling(remplissage);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
 	|IDENTIFICATEUR CROCHET_OUVRANT OPACITE CROCHET_FERMANT EGAL IDENTIFICATEUR CROCHET_OUVRANT OPACITE CROCHET_FERMANT
+	{
+		// On récupère le nom des la variable dans des string
+		std::string nom_variable_gauche = $1;
+		std::string nom_variable_droite = $6;
+
+		// On cherche si la variable gauche est associée à une forme et on retourne son index
+  		D->map_iterator = D->variables.find(nom_variable_droite);
+
+  		// Si l'index existe alors on applique les changements
+  		if (D->map_iterator != D->variables.end())
+  		{
+			// On récupère de la variable gauche pour obtenir sa propriété
+			Forme *f = D->shapeAt(D->map_iterator->second);
+			int opacite = f->get_opacity();
+
+			// On cherche si la variable droite est associée à une forme et on retourne son index
+  			D->map_iterator = D->variables.find(nom_variable_gauche);
+
+	  		// Si l'index existe alors on applique les changements
+	  		if (D->map_iterator != D->variables.end())
+	  		{
+				// On récupère la forme courante pour appliquer les options
+				f = D->shapeAt(D->map_iterator->second);
+				f->set_opacity(opacite);
+	  		}
+	  		// Sinon on affiche une erreur
+	    	else
+	    	{
+	    		std::cout << "Erreur: la variable " << nom_variable_gauche << " n'a pas été définie" << std::endl;
+	    	}
+  		}
+  		// Sinon on affiche une erreur
+    	else
+    	{
+    		std::cout << "Erreur: la variable " << nom_variable_droite << " n'a pas été définie" << std::endl;
+    	}
+	}
+
 
 syntaxe_fenetre:
 	FENETRE CROCHET_OUVRANT LONGUEUR CROCHET_FERMANT EGAL ENTIER
