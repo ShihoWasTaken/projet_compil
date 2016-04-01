@@ -29,7 +29,10 @@ class monDessin:public QWidget
 		void dessinerLigne(Ligne *ligne);
 		// On retourne la forme courante afin de pouvoir appliquer les options ensuite
 		Forme * currentShape(int index = 0)	{ return this->m_formes.at(this->m_formes.size()-1-index); }
-
+		// On retourne la forme à un index particulier
+		Forme * shapeAt(int index) { return this->m_formes.at(index); }
+		// On retourne l'index courant pour le map
+		int currentIndex()	{ return this->m_formes.size() - 1; }
 
 		void set_color(char *s)
 		{
@@ -92,6 +95,11 @@ class monDessin:public QWidget
 
 		    return result;
 		}
+
+		// Variable et indice dans le vecteur de forme
+		// Exemple: Cercle l1(), on aura map<"l1",0>
+		std::map<std::string,int> variables;
+		std::map<std::string,int>::iterator map_iterator;
 
 		std::vector<Forme *> m_formes;	// Vecteur contenant toutes les formes à afficher
 		int m_longueur;					// Longueur de la fenêtre
