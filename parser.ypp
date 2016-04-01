@@ -151,12 +151,7 @@ Option_multiligne:
 	}
 
 syntaxe_identifiant: 
-	Forme IDENTIFICATEUR PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE FIN_LIGNE	
-	{
-		Ligne *l = new Ligne($4,$6,$8,$10);
-		D->m_formes.push_back(l);
-		D->variables[$2] = D->currentIndex();
-	}
+	Instanciation_identifiant FIN_LIGNE
 
 option_identifiant:
 	IDENTIFICATEUR CROCHET_OUVRANT EPAISSEUR CROCHET_FERMANT EGAL ENTIER
@@ -340,6 +335,31 @@ Instanciation:
 			Ligne *l = new Ligne($3,$5,$7,$9);
 			D->m_formes.push_back(l);
 		}
+	}
+
+Instanciation_identifiant:
+	CERCLE IDENTIFICATEUR PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE
+	{
+		Cercle *c = new Cercle($4,$6,$8);
+		D->m_formes.push_back(c);
+		D->variables[$2] = D->currentIndex();
+	}
+	|Forme IDENTIFICATEUR PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE
+	{
+		std::string nomForme($1);
+		std::transform(nomForme.begin(), nomForme.end(), nomForme.begin(), ::tolower);
+
+		if(nomForme == "rectangle")
+		{
+			Rectangle *r = new Rectangle($4,$6,$8,$10);
+			D->m_formes.push_back(r);	
+		}
+		else if(nomForme == "ligne")
+		{
+			Ligne *l = new Ligne($4,$6,$8,$10);
+			D->m_formes.push_back(l);
+		}
+		D->variables[$2] = D->currentIndex();
 	}
 
 Instanciation_boucle:
