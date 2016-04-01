@@ -1314,7 +1314,7 @@ YY_RULE_SETUP
 case 20:
 YY_RULE_SETUP
 #line 74 "parser.lex"
-{ cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLOR);}
+{ cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLORNAME);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
@@ -1334,7 +1334,7 @@ YY_RULE_SETUP
 case 24:
 YY_RULE_SETUP
 #line 80 "parser.lex"
-{ cout << "Trouvé une virgule: " << yytext << endl; return(VIRGULE); }
+{ cout << "Trouvé une virgule: " << yytext << endl; yylval.texte = strdup(yytext); return(VIRGULE); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
@@ -1384,7 +1384,7 @@ YY_RULE_SETUP
 case 34:
 YY_RULE_SETUP
 #line 90 "parser.lex"
-{ cout << "Trouvé un hashtag: " << yytext << endl; return(HASHTAG); }
+{ cout << "Trouvé un hashtag: " << yytext << endl; yylval.texte = strdup(yytext); return(HASHTAG); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP

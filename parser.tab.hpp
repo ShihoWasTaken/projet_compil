@@ -49,35 +49,37 @@ extern int yydebug;
     CERCLE = 259,
     RECTANGLE = 260,
     LIGNE = 261,
-    COLOR = 262,
-    FILLING = 263,
-    EPAISSEUR = 264,
-    COULEUR = 265,
-    OPACITE = 266,
-    ROTATION = 267,
-    REMPLISSAGE = 268,
-    IDENTIFICATEUR = 269,
-    VIRGULE = 270,
-    DEGRE = 271,
-    POURCENT = 272,
-    PARENTHESE_OUVRANTE = 273,
-    PARENTHESE_FERMANTE = 274,
-    ACCOLADE_OUVRANTE = 275,
-    ACCOLADE_FERMANTE = 276,
-    CROCHET_OUVRANT = 277,
-    CROCHET_FERMANT = 278,
-    EGAL = 279,
-    FENETRE = 280,
-    LONGUEUR = 281,
-    HAUTEUR = 282,
-    FIN_LIGNE = 283,
-    HASHTAG = 284,
-    COMMENTAIRE_MONO = 285,
-    COMMENTAIRE_MULTI = 286,
-    IMAGE = 287,
-    PATH = 288,
-    DOT = 289,
-    EXT_IMG = 290
+    COULEUR = 262,
+    COLORNAME = 263,
+    RGBCOLOR = 264,
+    FILLING = 265,
+    EPAISSEUR = 266,
+    NOM_COULEUR = 267,
+    OPACITE = 268,
+    ROTATION = 269,
+    REMPLISSAGE = 270,
+    IDENTIFICATEUR = 271,
+    VIRGULE = 272,
+    DEGRE = 273,
+    POURCENT = 274,
+    PARENTHESE_OUVRANTE = 275,
+    PARENTHESE_FERMANTE = 276,
+    ACCOLADE_OUVRANTE = 277,
+    ACCOLADE_FERMANTE = 278,
+    CROCHET_OUVRANT = 279,
+    CROCHET_FERMANT = 280,
+    EGAL = 281,
+    FENETRE = 282,
+    LONGUEUR = 283,
+    HAUTEUR = 284,
+    FIN_LIGNE = 285,
+    HASHTAG = 286,
+    COMMENTAIRE_MONO = 287,
+    COMMENTAIRE_MULTI = 288,
+    IMAGE = 289,
+    PATH = 290,
+    DOT = 291,
+    EXT_IMG = 292
   };
 #endif
 
@@ -91,7 +93,7 @@ union YYSTYPE
     char * texte;
     int valeur_entiere;
 
-#line 95 "parser.tab.hpp" /* yacc.c:1909  */
+#line 97 "parser.tab.hpp" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

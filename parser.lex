@@ -71,13 +71,13 @@ remplissage (plein|vide)
 
 
 
-{couleur} { cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLOR);}
+{couleur} { cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLORNAME);}
 {remplissage} { cout << "Trouvé un remplissage: " << yytext << endl; yylval.texte = strdup(yytext); return(FILLING);}
 
 {identificateur} { cout << "Trouvé un identificateur: " << yytext << endl; return(IDENTIFICATEUR); }
 
 "." { cout << "Trouvé un point: " << yytext << endl; return(DOT); }
-"," { cout << "Trouvé une virgule: " << yytext << endl; return(VIRGULE); }
+"," { cout << "Trouvé une virgule: " << yytext << endl; yylval.texte = strdup(yytext); return(VIRGULE); }
 "°" { cout << "Trouvé un degré: " << "\xc2\xb0" << endl; return(DEGRE); }
 "%"	{ cout << "Trouvé un %: " << yytext << endl; return(POURCENT); }
 "("	{ cout << "Trouvé une paranthèse: " << yytext << endl; return(PARENTHESE_OUVRANTE); }
@@ -87,5 +87,5 @@ remplissage (plein|vide)
 "["	{ cout << "Trouvé un crochet: " << yytext << endl; return(CROCHET_OUVRANT);}
 "]"	{ cout << "Trouvé un crochet: " << yytext << endl; return(CROCHET_FERMANT); }
 "="	{ cout << "Trouvé un égal: " << yytext << endl; return(EGAL); }
-"#"	{ cout << "Trouvé un hashtag: " << yytext << endl; return(HASHTAG); }
+"#"	{ cout << "Trouvé un hashtag: " << yytext << endl; yylval.texte = strdup(yytext); return(HASHTAG); }
 %%

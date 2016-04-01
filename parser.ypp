@@ -34,12 +34,13 @@ QPointer<monDessin> D;
 %token<texte> CERCLE
 %token<texte> RECTANGLE
 %token<texte> LIGNE
-
-%token<texte> COLOR
+%token<texte> COULEUR
+%token<texte> COLORNAME
+%token<texte> RGBCOLOR
 %token<texte> FILLING
 
 %token<valeur_entiere> EPAISSEUR
-%token<texte> COULEUR
+%token<texte> NOM_COULEUR
 %token<valeur_entiere> OPACITE
 %token<valeur_entiere> ROTATION
 %token<texte> REMPLISSAGE
@@ -66,7 +67,7 @@ QPointer<monDessin> D;
 %token DOT
 %token<texte> EXT_IMG
 
-
+%type<texte> Color
 %type<texte> Forme
 
 %start Input
@@ -87,7 +88,7 @@ Input:
 	|syntaxe_image Input
 
 syntaxe_monoligne: 
-	Instanciation ACCOLADE_OUVRANTE COLOR VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE
+	Instanciation ACCOLADE_OUVRANTE Color VIRGULE ENTIER VIRGULE FILLING VIRGULE ENTIER DEGRE VIRGULE ENTIER POURCENT ACCOLADE_FERMANTE
 	{
 		// On récupère la forme courante pour appliquer les options
 		Forme *f = D->currentShape();
@@ -112,7 +113,7 @@ syntaxe_multiligne:
 	ACCOLADE_FERMANTE
 
 Option_multiligne:
-	COULEUR EGAL COLOR FIN_LIGNE
+	COULEUR EGAL Color FIN_LIGNE
 	{
 		// On récupère la forme courante pour appliquer les options
 		Forme *f = D->currentShape();
@@ -160,7 +161,7 @@ option_identifiant:
 		Forme *f = D->currentShape();
 		f->set_thickness($6);
 	}
-	|IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR
+	|IDENTIFICATEUR CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL Color
 	{
 		// On récupère la forme courante pour appliquer les options
 		Forme *f = D->currentShape();
@@ -197,7 +198,7 @@ syntaxe_fenetre:
 	{
 		D->m_hauteur = $6;
 	}
-	|FENETRE CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL COLOR
+	|FENETRE CROCHET_OUVRANT COULEUR CROCHET_FERMANT EGAL Color
 	{
 		D->set_color($6);
 	}
@@ -205,7 +206,7 @@ syntaxe_fenetre:
 syntaxe_image:
 	IMAGE PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE IDENTIFICATEUR DOT EXT_IMG PARENTHESE_FERMANTE
 	{
-		Image *i = new Image($3,$5,"piksdachu.jpg");
+		Image *i = new Image($3,$5,"pikachu.jpg");
 		D->m_formes.push_back(i);
 	}
 
@@ -213,7 +214,26 @@ Forme:
 	RECTANGLE
 	|LIGNE
 
+Color:
+	COLORNAME
+	|HASHTAG ENTIER VIRGULE ENTIER VIRGULE ENTIER
+	{
+		std::string str = "#";
+		std::string str2 = std::to_string($2);
 
+		str += str2;
+		str += ",";
+
+		std::string str3 = std::to_string($4);
+		str += str3;
+		str += ",";
+
+		std::string str4 = std::to_string($6);
+		str += str4;
+
+		// On retourne la chaine formatée Example: #255,255,255
+		$$ = (char *) str.c_str();
+	}
 
 Instanciation:
 	CERCLE PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE ENTIER PARENTHESE_FERMANTE
