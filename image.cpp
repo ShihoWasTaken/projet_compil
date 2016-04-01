@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Image::Image(int x, int y, char * path) : Forme(x, y), path(path) {}
+Image::Image(int x, int y, char * path) : Forme(x, y), path(path), QPath(path) {}
 
 ostream& Image::print(ostream & out) const {
 	out << "Image :" << endl;

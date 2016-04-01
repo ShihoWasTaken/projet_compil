@@ -51,9 +51,9 @@ void monDessin::dessinerImage(Image * image)
 {
 	// On définit le painter
 	QPainter painter(this);
-
+	
 	// On tente de créer une QImage à partir du chemin passé en paramètre
-	QImage img(image->get_path());
+	QImage img(image->get_QPath());
 
 	// Si l'image spécifiée est introuvable, on affiche un image avec un ?
 	if(img.isNull())

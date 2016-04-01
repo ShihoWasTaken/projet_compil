@@ -53,7 +53,7 @@ remplissage (plein|vide)
 {image} { yylval.texte = strdup(yytext); return(IMAGE); }
 
 
-{extension} { yylval.texte = strdup(yytext); return(EXT_IMG); }
+{extension} { yylval.texte = strdup(yytext); yylval.texte = strdup(yytext); return(EXT_IMG); }
 {path}(.jpg) { yylval.texte = strdup(yytext); return(PATH); }
 
 
@@ -74,9 +74,9 @@ remplissage (plein|vide)
 {couleur} { cout << "Trouvé une couleur: " << yytext << endl; yylval.texte = strdup(yytext); return(COLORNAME);}
 {remplissage} { cout << "Trouvé un remplissage: " << yytext << endl; yylval.texte = strdup(yytext); return(FILLING);}
 
-{identificateur} { cout << "Trouvé un identificateur: " << yytext << endl; return(IDENTIFICATEUR); }
+{identificateur} { cout << "Trouvé un identificateur: " << yytext << endl; yylval.texte = strdup(yytext); return(IDENTIFICATEUR); }
 
-"." { cout << "Trouvé un point: " << yytext << endl; return(DOT); }
+"." { cout << "Trouvé un point: " << yytext << endl; yylval.texte = strdup(yytext); return(DOT); }
 "," { cout << "Trouvé une virgule: " << yytext << endl; yylval.texte = strdup(yytext); return(VIRGULE); }
 "°" { cout << "Trouvé un degré: " << "\xc2\xb0" << endl; return(DEGRE); }
 "%"	{ cout << "Trouvé un %: " << yytext << endl; return(POURCENT); }

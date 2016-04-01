@@ -4,8 +4,8 @@ Ligne(50, 85, 150, 150){bleu, 15, vide, 90°, 50%}
 
 Cercle(80, 40, 50){jaune, 5, plein, 90°, 50%}
 
-CERCLE(1, 1, 50){
-couleur = vert
+CERCLE(301, 301, 50){
+couleur = rouge
 rotation = 50°
 remplissage = plein
 épaisseur = 3

@@ -64,7 +64,7 @@ QPointer<monDessin> D;
 %token COMMENTAIRE_MULTI
 %token IMAGE
 %token<texte> PATH
-%token DOT
+%token<texte> DOT
 %token<texte> EXT_IMG
 
 %type<texte> Color
@@ -206,7 +206,16 @@ syntaxe_fenetre:
 syntaxe_image:
 	IMAGE PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE IDENTIFICATEUR DOT EXT_IMG PARENTHESE_FERMANTE
 	{
-		Image *i = new Image($3,$5,"pikachu.jpg");
+		std::string nom = $7;
+		std::string ext = $9;
+
+		nom += ".";
+		nom += $9;
+
+		char * path = (char *) nom.c_str();
+
+		std::cout << "path = " << path << std::endl;
+		Image *i = new Image($3,$5,path);
 		D->m_formes.push_back(i);
 	}
 

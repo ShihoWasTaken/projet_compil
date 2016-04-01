@@ -490,8 +490,8 @@ static const yytype_uint8 yyrline[] =
 {
        0,    77,    77,    80,    81,    82,    83,    84,    85,    86,
       87,    88,    91,   107,   116,   122,   128,   137,   143,   151,
-     158,   164,   170,   176,   185,   193,   197,   201,   207,   214,
-     215,   218,   219,   239,   244
+     158,   164,   170,   176,   185,   193,   197,   201,   207,   223,
+     224,   227,   228,   248,   253
 };
 #endif
 
@@ -1516,14 +1516,23 @@ yyreduce:
   case 28:
 #line 208 "parser.ypp" /* yacc.c:1646  */
     {
-		Image *i = new Image((yyvsp[-7].valeur_entiere),(yyvsp[-5].valeur_entiere),"pikachu.jpg");
+		std::string nom = (yyvsp[-3].texte);
+		std::string ext = (yyvsp[-1].texte);
+
+		nom += ".";
+		nom += (yyvsp[-1].texte);
+
+		char * path = (char *) nom.c_str();
+
+		std::cout << "path = " << path << std::endl;
+		Image *i = new Image((yyvsp[-7].valeur_entiere),(yyvsp[-5].valeur_entiere),path);
 		D->m_formes.push_back(i);
 	}
-#line 1523 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1532 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 220 "parser.ypp" /* yacc.c:1646  */
+#line 229 "parser.ypp" /* yacc.c:1646  */
     {
 		std::string str = "#";
 		std::string str2 = std::to_string((yyvsp[-4].valeur_entiere));
@@ -1541,20 +1550,20 @@ yyreduce:
 		// On retourne la chaine formatée Example: #255,255,255
 		(yyval.texte) = (char *) str.c_str();
 	}
-#line 1545 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1554 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 240 "parser.ypp" /* yacc.c:1646  */
+#line 249 "parser.ypp" /* yacc.c:1646  */
     {
 		Cercle *c = new Cercle((yyvsp[-5].valeur_entiere),(yyvsp[-3].valeur_entiere),(yyvsp[-1].valeur_entiere));
 		D->m_formes.push_back(c);
 	}
-#line 1554 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1563 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 245 "parser.ypp" /* yacc.c:1646  */
+#line 254 "parser.ypp" /* yacc.c:1646  */
     {
 		std::string nomForme((yyvsp[-9].texte));
 		std::transform(nomForme.begin(), nomForme.end(), nomForme.begin(), ::tolower);
@@ -1570,11 +1579,11 @@ yyreduce:
 			D->m_formes.push_back(l);
 		}
 	}
-#line 1574 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1583 "parser.tab.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1578 "parser.tab.cpp" /* yacc.c:1646  */
+#line 1587 "parser.tab.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1802,7 +1811,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 261 "parser.ypp" /* yacc.c:1906  */
+#line 270 "parser.ypp" /* yacc.c:1906  */
 
 
 

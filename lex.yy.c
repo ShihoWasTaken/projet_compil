@@ -1264,7 +1264,7 @@ YY_RULE_SETUP
 case 10:
 YY_RULE_SETUP
 #line 56 "parser.lex"
-{ yylval.texte = strdup(yytext); return(EXT_IMG); }
+{ yylval.texte = strdup(yytext); yylval.texte = strdup(yytext); return(EXT_IMG); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
@@ -1324,12 +1324,12 @@ YY_RULE_SETUP
 case 22:
 YY_RULE_SETUP
 #line 77 "parser.lex"
-{ cout << "Trouvé un identificateur: " << yytext << endl; return(IDENTIFICATEUR); }
+{ cout << "Trouvé un identificateur: " << yytext << endl; yylval.texte = strdup(yytext); return(IDENTIFICATEUR); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 79 "parser.lex"
-{ cout << "Trouvé un point: " << yytext << endl; return(DOT); }
+{ cout << "Trouvé un point: " << yytext << endl; yylval.texte = strdup(yytext); return(DOT); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
