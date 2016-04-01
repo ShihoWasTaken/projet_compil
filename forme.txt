@@ -1,6 +1,6 @@
 Rectangle(10, 15, 20, 25){rouge, 5, plein, 90°, 50%}
 
-Ligne(50, 85, 150, 150){bleu, 15, vide, 90°, 50%}
+Ligne(350, 85, 850, 85){bleu, 15, vide, 90°, 50%}
 
 Cercle(80, 40, 50){jaune, 5, plein, 90°, 50%}
 
@@ -34,6 +34,6 @@ Image(0,0,pikachu.jpg)
 
 // Forme(attributs)(nombre_iteration,decalage_x,decalage_y){options}
 boucler{
-	Rectangle(500, 30, 20, 25)(5,30,5){#255,160,122, 1, plein, 15°, 80%}
+	Rectangle(500, 30, 20, 100)(5,30,5){#255,160,122, 1, plein, 0°, 80%}
 	Cercle(500, 300, 50)(5,80,0){jaune, 5, plein, 90°, 70%}
 }

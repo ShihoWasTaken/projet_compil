@@ -91,7 +91,7 @@ void monDessin::dessinerRectangle(Rectangle *rectangle)
 	painter.setPen(pen);	
 
 	// On dessine un rectangle
-	painter.drawRect(rectangle->get_x(), rectangle->get_y(), rectangle->get_length(), rectangle->get_width());
+	painter.drawRect(rectangle->get_x(), rectangle->get_y(), rectangle->get_length(), rectangle->get_height());
 
 }
 

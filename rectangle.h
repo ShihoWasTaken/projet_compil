@@ -8,16 +8,16 @@
 class Rectangle : virtual public Forme {
 	private:
 		int length;
-		int width;
+		int height;
 	
 	public:
-		Rectangle(int x, int y, int length, int width);
+		Rectangle(int x, int y, int length, int height);
 		
 		int get_length() { return length; }
-		int get_width() { return width; }
+		int get_height() { return height; }
 		
 		void set_length(int length) { this->length = length; }
-		void set_width(int width) { this->width = width; }
+		void set_height(int height) { this->height = height; }
 
 		std::ostream& print(std::ostream& out) const;
 
