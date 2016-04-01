@@ -205,7 +205,7 @@ syntaxe_fenetre:
 syntaxe_image:
 	IMAGE PARENTHESE_OUVRANTE ENTIER VIRGULE ENTIER VIRGULE IDENTIFICATEUR DOT EXT_IMG PARENTHESE_FERMANTE
 	{
-		Image *i = new Image($3,$5,"pikachu.jpg");
+		Image *i = new Image($3,$5,"piksdachu.jpg");
 		D->m_formes.push_back(i);
 	}
 

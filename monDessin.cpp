@@ -52,8 +52,18 @@ void monDessin::dessinerImage(Image * image)
 	// On définit le painter
 	QPainter painter(this);
 
-	painter.drawImage(image->get_x(),image->get_y(),QImage(image->get_path()));
+	// On tente de créer une QImage à partir du chemin passé en paramètre
+	QImage img(image->get_path());
 
+	// Si l'image spécifiée est introuvable, on affiche un image avec un ?
+	if(img.isNull())
+	{
+		cout << "Le chemin de l'image spécifiée est introuvable" << endl;
+		painter.drawImage(image->get_x(),image->get_y(), QImage("unknown.jpg"));
+	}
+	// Sinon, on dessine l'image passée en paramètre
+	else
+		painter.drawImage(image->get_x(),image->get_y(), img);
 }
 
 void monDessin::dessinerRectangle(Rectangle *rectangle)

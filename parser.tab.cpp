@@ -1511,7 +1511,7 @@ yyreduce:
   case 28:
 #line 207 "parser.ypp" /* yacc.c:1646  */
     {
-		Image *i = new Image((yyvsp[-7].valeur_entiere),(yyvsp[-5].valeur_entiere),"pikachu.jpg");
+		Image *i = new Image((yyvsp[-7].valeur_entiere),(yyvsp[-5].valeur_entiere),"piksdachu.jpg");
 		D->m_formes.push_back(i);
 	}
 #line 1518 "parser.tab.cpp" /* yacc.c:1646  */
